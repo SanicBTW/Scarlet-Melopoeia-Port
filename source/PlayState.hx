@@ -3408,6 +3408,33 @@ class PlayState extends MusicBeatState
 				animToPlay = 'singRIGHTmiss';
 		}
 
+		var themMissAnims = ["singLEFTmiss", "singDOWNmiss", "singUPmiss", "singRIGHTmiss"];
+
+		var bleed = new FlxTimer();
+
+		switch(daNote.noteType)
+		{
+			case "RUMIA-Bullet Note":
+				health -= 0.25;
+				bleed.start(0.2, timer -> {
+					health -= 0.001;
+				}, 20);
+				boyfriend.playAnim(themMissAnims[daNote.noteData % 4]);
+			case "REIMU-Bullet Note":
+				if(storyDifficulty == 2)
+				{
+					health -= 1;
+				}
+				else
+				{
+					health -= 0.8;
+					boyfriend.playAnim(themMissAnims[daNote.noteData % 4]);
+					bleed.start(0.2, timer -> {
+						health -= 0.001;
+					}, 20);
+				}
+		}
+
 		if(daNote.noteType == 'GF Sing') {
 			gf.playAnim(animToPlay, true);
 		} else {
@@ -3519,21 +3546,32 @@ class PlayState extends MusicBeatState
 						animToPlay = 'singRIGHT';
 				}
 
-				if(note.noteType == "REIMU-Bullet Note")
+				var grazeAnims = ["LEFTgraze", "DOWNgraze", "UPgraze", "RIGHTgraze"];
+				switch(note.noteType)
 				{
-					var dir = "0";
-					switch(Std.int(Math.abs(note.noteData)))
-					{
-						case 0:
-							dir = "0";
-						case 1:
-							dir = "1";
-						case 2:
-							dir = "2";
-						case 3:
-							dir = "3";
-					}
-					REIMUorb.animation.play(dir);
+					case "RUMIA-Bullet Note":
+						boyfriend.playAnim(grazeAnims[Std.int(Math.abs(note.noteData))], true);
+						boyfriend.specialAnim = true;
+						FlxG.sound.play(Paths.sound("graze"), 0.1);
+
+					case "REIMU-Bullet Note":
+						boyfriend.playAnim("dodge", true);
+						boyfriend.specialAnim = true;
+						camGame.shake(0.01, 0.2);
+
+						var dir = "0";
+						switch(Std.int(Math.abs(note.noteData)))
+						{
+							case 0:
+								dir = "0";
+							case 1:
+								dir = "1";
+							case 2:
+								dir = "2";
+							case 3:
+								dir = "3";
+						}
+						REIMUorb.animation.play(dir);
 				}
 
 				if(note.noteType == 'GF Sing') {

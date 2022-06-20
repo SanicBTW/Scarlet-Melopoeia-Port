@@ -83,6 +83,57 @@ class Note extends FlxSprite
 
 		if(noteData > -1 && noteType != value) {
 			switch(value) {
+				case "RUMIA-Hurt 2-RED":
+					ignoreNote = true;
+					hitCausesMiss = true;
+					texture = "specialNotes/RUMIAdodge_wave2RED";
+					hitHealth -= 0.23;
+					missHealth = 0.0475;
+
+				case "RUMIA-Hurt 2-BLUE":
+					ignoreNote = true;
+					hitCausesMiss = true;
+					texture = "specialNotes/RUMIAdodge_wave2BLUE";
+					hitHealth -= 0.23;
+					missHealth = 0.0475;
+
+				case "RUMIA-Hurt 2-GREEN":
+					ignoreNote = true;
+					hitCausesMiss = true;
+					texture = "specialNotes/RUMIAdodge_wave2GREEN";
+					hitHealth -= 0.23;
+					missHealth = 0.0475;
+
+				case "RUMIA-Hurt 1":
+					ignoreNote = true;
+					hitCausesMiss = true;
+					texture = "specialNotes/RUMIAdodge_wave1";
+					hitHealth -= 0.23;
+					missHealth = 0.0475;
+				//is this used?
+				case "RUMIA-Bullet Note":
+					ignoreNote = false;
+					mustPress = true;
+					texture = "specialNotes/RUMIAbullet_NOTE";
+					colorSwap.hue = 0;
+					colorSwap.saturation = -20;
+					colorSwap.brightness = 1;
+				//idk if this one is used
+				case "Projectile Note":
+					ignoreNote = true;
+					mustPress = false;
+					hitCausesMiss = true;
+					texture = "specialNotes/PROJECTILENOTE_assets";
+					hitHealth -= 0.23;
+					missHealth = 0.0475;
+				case "REIMU-Bullet Note":
+					ignoreNote = false;
+					mustPress = true;
+					texture = "specialNotes/REIMUbullet_NOTE";
+					colorSwap.hue = 0;
+					colorSwap.saturation = -20;
+					colorSwap.brightness = 1;
+					hitCausesMiss = false;
 				case 'Hurt Note':
 					ignoreNote = mustPress;
 					reloadNote('HURT');
