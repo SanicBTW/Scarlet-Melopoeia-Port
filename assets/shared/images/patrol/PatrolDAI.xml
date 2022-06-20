@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="PatrolDAI.png">
+	<!-- Created with Adobe Animate version 21.0.6.41649 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="DAIYOUSEI_idle0000" x="0" y="0" width="323" height="482" frameX="0" frameY="-7" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0001" x="0" y="0" width="323" height="482" frameX="0" frameY="-7" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0002" x="323" y="0" width="315" height="484" frameX="0" frameY="-5" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0003" x="323" y="0" width="315" height="484" frameX="0" frameY="-5" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0004" x="638" y="0" width="311" height="485" frameX="-1" frameY="-4" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0005" x="638" y="0" width="311" height="485" frameX="-1" frameY="-4" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0006" x="949" y="0" width="315" height="489" frameX="-2" frameY="0" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0007" x="949" y="0" width="315" height="489" frameX="-2" frameY="0" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0008" x="949" y="0" width="315" height="489" frameX="-2" frameY="0" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0009" x="1264" y="0" width="316" height="487" frameX="-2" frameY="-2" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0010" x="1264" y="0" width="316" height="487" frameX="-2" frameY="-2" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0011" x="1264" y="0" width="316" height="487" frameX="-2" frameY="-2" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0012" x="1264" y="0" width="316" height="487" frameX="-2" frameY="-2" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0013" x="1264" y="0" width="316" height="487" frameX="-2" frameY="-2" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0014" x="1264" y="0" width="316" height="487" frameX="-2" frameY="-2" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0015" x="1580" y="0" width="327" height="484" frameX="0" frameY="-5" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0016" x="1580" y="0" width="327" height="484" frameX="0" frameY="-5" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0017" x="0" y="489" width="325" height="484" frameX="0" frameY="-5" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0018" x="0" y="489" width="325" height="484" frameX="0" frameY="-5" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0019" x="325" y="489" width="319" height="489" frameX="-1" frameY="0" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0020" x="325" y="489" width="319" height="489" frameX="-1" frameY="0" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0021" x="644" y="489" width="317" height="488" frameX="-2" frameY="-1" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0022" x="644" y="489" width="317" height="488" frameX="-2" frameY="-1" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0023" x="644" y="489" width="317" height="488" frameX="-2" frameY="-1" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0024" x="1264" y="0" width="316" height="487" frameX="-2" frameY="-2" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0025" x="1264" y="0" width="316" height="487" frameX="-2" frameY="-2" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0026" x="1264" y="0" width="316" height="487" frameX="-2" frameY="-2" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0027" x="1264" y="0" width="316" height="487" frameX="-2" frameY="-2" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0028" x="1264" y="0" width="316" height="487" frameX="-2" frameY="-2" frameWidth="327" frameHeight="489"/>
+	<SubTexture name="DAIYOUSEI_idle0029" x="1264" y="0" width="316" height="487" frameX="-2" frameY="-2" frameWidth="327" frameHeight="489"/>
+</TextureAtlas>

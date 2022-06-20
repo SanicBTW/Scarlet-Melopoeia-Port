@@ -1,0 +1,99 @@
+{
+	"song": {
+		"speed": 2,
+		"stage": "subway",
+		"player1": "noRBF",
+		"player2": "noRGF",
+		"player3": null,
+		"events": [
+			[
+				0,
+				[
+					[
+						"Set GF Speed",
+						"4",
+						""
+					]
+				]
+			],
+			[
+				1500,
+				[
+					[
+						"Play Animation",
+						"HUDappear",
+						""
+					]
+				]
+			],
+			[
+				3000,
+				[
+					[
+						"Play Animation",
+						"COUPLEappear",
+						""
+					]
+				]
+			],
+			[
+				9000,
+				[
+					[
+						"Set GF Speed",
+						"2",
+						""
+					]
+				]
+			],
+			[
+				12000,
+				[
+					[
+						"Play Animation",
+						"BGappear",
+						""
+					]
+				]
+			],
+			[
+				13500,
+				[
+					[
+						"Set GF Speed",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				14250,
+				[
+					[
+						"Play Animation",
+						"LIGHTappear",
+						""
+					]
+				]
+			],
+			[
+				105000,
+				[
+					[
+						"Set GF Speed",
+						"4",
+						""
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": "noteSplashes",
+		"validScore": false,
+		"gfVersion": "couple",
+		"bpm": 160,
+		"arrowSkin": "subwayNOTES",
+		"needsVoices": false,
+		"song": "lowest-vibes"
+	}
+}

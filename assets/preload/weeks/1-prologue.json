@@ -1,0 +1,32 @@
+{
+	"storyName": "Trip Invitation",
+	"difficulties": "Hard",
+	"hideFreeplay": false,
+	"weekBackground": "",
+	"weekBefore": "tutorial",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": true,
+	"hideStoryMode": false,
+	"songs": [
+		[
+			"Lowest Vibes",
+			"phone",
+			[
+				0,
+				0,
+				0
+			]
+		]
+	],
+	"weekCharacters": [
+		"",
+		"prologue",
+		""
+	],
+	"hiddenUntilUnlocked": false,
+	"weekName": "The Prologue"
+}

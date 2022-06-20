@@ -1,0 +1,49 @@
+{
+	"storyName": "the maiden and her shrine",
+	"difficulties": "Hard",
+	"hideFreeplay": false,
+	"weekBackground": "",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"weekBefore": "1-prologue",
+	"startUnlocked": true,
+	"weekCharacters": [
+		"",
+		"arrival",
+		""
+	],
+	"songs": [
+		[
+			"Eternal Pray",
+			"reimu",
+			[
+				226,
+				40,
+				40
+			]
+		],
+		[
+			"Mystical Maiden",
+			"reimu",
+			[
+				226,
+				40,
+				40
+			]
+		],
+		[
+			"Youkai of the Dark",
+			"rumia",
+			[
+				20,
+				20,
+				40
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "Arrival"
+}

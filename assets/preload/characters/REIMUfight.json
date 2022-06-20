@@ -1,59 +1,59 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				160,
 				-180
 			],
-			"anim": "idle",
+			"loop": false,
 			"fps": 24,
-			"name": "REIMU_idleFIGHT",
-			"indices": []
+			"anim": "idle",
+			"indices": [],
+			"name": "REIMU_idleFIGHT"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				90,
 				-143
 			],
-			"anim": "singRIGHT",
+			"loop": false,
 			"fps": 24,
-			"name": "REIMU_rightFIGHT",
-			"indices": []
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "REIMU_rightFIGHT"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				205,
 				-185
 			],
-			"anim": "singLEFT",
+			"loop": false,
 			"fps": 24,
-			"name": "REIMU_leftFIGHT",
-			"indices": []
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "REIMU_leftFIGHT"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				154,
 				-169
 			],
-			"anim": "singUP",
+			"loop": false,
 			"fps": 24,
-			"name": "REIMU_upFIGHT",
-			"indices": []
+			"anim": "singUP",
+			"indices": [],
+			"name": "REIMU_upFIGHT"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				280,
 				-106
 			],
-			"anim": "singDOWN",
+			"loop": false,
 			"fps": 24,
-			"name": "REIMU_downFIGHT",
-			"indices": []
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "REIMU_downFIGHT"
 		}
 	],
 	"no_antialiasing": false,
@@ -73,6 +73,6 @@
 		-230,
 		160
 	],
-	"sing_duration": 4,
+	"sing_duration": 5.99999999999999,
 	"scale": 1
 }

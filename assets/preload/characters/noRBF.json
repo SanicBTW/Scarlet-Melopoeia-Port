@@ -1,0 +1,169 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-85,
+				-10
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "RBF_idle"
+		},
+		{
+			"offsets": [
+				-55,
+				-16
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "RBF_LEFTSing"
+		},
+		{
+			"offsets": [
+				-100,
+				-80
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "RBF_DOWNSing"
+		},
+		{
+			"offsets": [
+				-129,
+				47
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "RBF_UPSing"
+		},
+		{
+			"offsets": [
+				-108,
+				-7
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "RBF_RIGHTSing"
+		},
+		{
+			"offsets": [
+				-33,
+				-11
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFTmiss",
+			"indices": [],
+			"name": "RBF_LEFTMiss"
+		},
+		{
+			"offsets": [
+				-86,
+				-80
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "RBF_DOWNMiss"
+		},
+		{
+			"offsets": [
+				-127,
+				47
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "RBF_UPMiss"
+		},
+		{
+			"offsets": [
+				-104,
+				-8
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "RBF_RIGHTMiss"
+		},
+		{
+			"offsets": [
+				-33,
+				41
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "firstDeath",
+			"indices": [],
+			"name": "RBF_death"
+		},
+		{
+			"offsets": [
+				-35,
+				-172
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "deathLoop",
+			"indices": [
+				0,
+				1
+			],
+			"name": "Continue"
+		},
+		{
+			"offsets": [
+				51,
+				-73
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "deathConfirm",
+			"indices": [],
+			"name": "ContinueConfirm"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-125,
+				65
+			],
+			"anim": "dodge",
+			"fps": 24,
+			"name": "RBF_dodge",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/noRBF",
+	"position": [
+		250,
+		0
+	],
+	"healthicon": "rbf",
+	"flip_x": true,
+	"healthbar_colors": [
+		69,
+		136,
+		255
+	],
+	"camera_position": [
+		0,
+		350
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

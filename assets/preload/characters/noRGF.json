@@ -1,0 +1,189 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				3,
+				0
+			],
+			"loop": false,
+			"anim": "cheer",
+			"fps": 24,
+			"name": "GF Cheer",
+			"indices": []
+		},
+		{
+			"offsets": [
+				0,
+				-19
+			],
+			"loop": false,
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "GF left note",
+			"indices": []
+		},
+		{
+			"offsets": [
+				0,
+				-20
+			],
+			"loop": false,
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "GF Down Note",
+			"indices": []
+		},
+		{
+			"offsets": [
+				0,
+				4
+			],
+			"loop": false,
+			"anim": "singUP",
+			"fps": 24,
+			"name": "GF Up Note",
+			"indices": []
+		},
+		{
+			"offsets": [
+				0,
+				-20
+			],
+			"loop": false,
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "GF Right Note",
+			"indices": []
+		},
+		{
+			"offsets": [
+				45,
+				-8
+			],
+			"loop": true,
+			"anim": "hairBlow",
+			"fps": 24,
+			"name": "GF Dancing Beat Hair blowing",
+			"indices": [
+				0,
+				1,
+				2,
+				3
+			]
+		},
+		{
+			"offsets": [
+				0,
+				-9
+			],
+			"loop": false,
+			"anim": "hairFall",
+			"fps": 24,
+			"name": "GF Dancing Beat Hair Landing",
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11
+			]
+		},
+		{
+			"offsets": [
+				-2,
+				-17
+			],
+			"loop": true,
+			"anim": "scared",
+			"fps": 24,
+			"name": "GF FEAR",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-100,
+				-79
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "danceLeft",
+			"indices": [
+				24,
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11
+			],
+			"name": "RGF_idle"
+		},
+		{
+			"offsets": [
+				-100,
+				-79
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "danceRight",
+			"indices": [
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23
+			],
+			"name": "RGF_idle"
+		},
+		{
+			"offsets": [
+				-100,
+				-79
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "sad",
+			"indices": [],
+			"name": "RGF_miss"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/noRGF",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "rgf",
+	"flip_x": false,
+	"healthbar_colors": [
+		205,
+		40,
+		40
+	],
+	"camera_position": [
+		20,
+		90
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

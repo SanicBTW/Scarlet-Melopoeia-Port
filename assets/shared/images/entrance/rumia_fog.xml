@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="rumia_fog.png">
+	<!-- Created with Adobe Animate version 21.0.6.41649 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="rumia_fog0000" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-900" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0001" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-861" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0002" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-822" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0003" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-783" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0004" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-744" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0005" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-705" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0006" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-666" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0007" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-627" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0008" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-587" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0009" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-548" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0010" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-509" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0011" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-470" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0012" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-431" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0013" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-392" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0014" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-353" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0015" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-314" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0016" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-274" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0017" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-235" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0018" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-196" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0019" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-157" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0020" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-118" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0021" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-79" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0022" x="0" y="0" width="1600" height="1800" frameX="0" frameY="-40" frameWidth="1600" frameHeight="2700"/>
+	<SubTexture name="rumia_fog0023" x="0" y="0" width="1600" height="1800" frameX="0" frameY="0" frameWidth="1600" frameHeight="2700"/>
+</TextureAtlas>

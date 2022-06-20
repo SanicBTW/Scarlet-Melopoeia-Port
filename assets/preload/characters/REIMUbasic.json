@@ -1,59 +1,59 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				40,
 				-140
 			],
-			"anim": "idle",
+			"loop": false,
 			"fps": 24,
-			"name": "REIMU_idle",
-			"indices": []
+			"anim": "idle",
+			"indices": [],
+			"name": "REIMU_idle"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				72,
 				-140
 			],
-			"anim": "singLEFT",
+			"loop": false,
 			"fps": 24,
-			"name": "REIMU_leftSING",
-			"indices": []
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "REIMU_leftSING"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				60,
 				-140
 			],
-			"anim": "singDOWN",
+			"loop": false,
 			"fps": 24,
-			"name": "REIMU_downSING",
-			"indices": []
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "REIMU_downSING"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				57,
 				-114
 			],
-			"anim": "singUP",
+			"loop": false,
 			"fps": 24,
-			"name": "REIMU_upSING",
-			"indices": []
+			"anim": "singUP",
+			"indices": [],
+			"name": "REIMU_upSING"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				30,
 				-130
 			],
-			"anim": "singRIGHT",
+			"loop": false,
 			"fps": 24,
-			"name": "REIMU_rightSING",
-			"indices": []
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "REIMU_rightSING"
 		}
 	],
 	"no_antialiasing": false,
@@ -73,6 +73,6 @@
 		-120,
 		140
 	],
-	"sing_duration": 4,
+	"sing_duration": 5.99999999999999,
 	"scale": 1
 }

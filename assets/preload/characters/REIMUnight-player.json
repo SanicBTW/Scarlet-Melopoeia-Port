@@ -1,0 +1,268 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-3,
+				5
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "hey",
+			"indices": [],
+			"name": "BF HEY"
+		},
+		{
+			"offsets": [
+				14,
+				18
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "hurt",
+			"indices": [],
+			"name": "BF hit"
+		},
+		{
+			"offsets": [
+				-4,
+				0
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "scared",
+			"indices": [],
+			"name": "BF idle shaking"
+		},
+		{
+			"offsets": [
+				294,
+				267
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "attack",
+			"indices": [],
+			"name": "boyfriend attack"
+		},
+		{
+			"offsets": [
+				-40,
+				-40
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "pre-attack",
+			"indices": [],
+			"name": "bf pre attack"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				235,
+				150
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "REIMU_idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				205,
+				218
+			],
+			"anim": "LEFTgraze",
+			"fps": 24,
+			"name": "REIMU_GRAZEleft",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				186,
+				182
+			],
+			"anim": "DOWNgraze",
+			"fps": 24,
+			"name": "REIMU_GRAZEdown",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				174,
+				177
+			],
+			"anim": "UPgraze",
+			"fps": 24,
+			"name": "REIMU_GRAZEup",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				2,
+				145
+			],
+			"anim": "RIGHTgraze",
+			"fps": 24,
+			"name": "REIMU_GRAZEright",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				205,
+				218
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "REIMU_left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				186,
+				182
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "REIMU_down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				174,
+				177
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "REIMU_up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				2,
+				145
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "REIMU_right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				205,
+				218
+			],
+			"anim": "singLEFTmiss",
+			"fps": 24,
+			"name": "REIMU_MISSleft",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				186,
+				182
+			],
+			"anim": "singDOWNmiss",
+			"fps": 24,
+			"name": "REIMU_MISSdown",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				174,
+				177
+			],
+			"anim": "singUPmiss",
+			"fps": 24,
+			"name": "REIMU_MISSup",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				2,
+				145
+			],
+			"anim": "singRIGHTmiss",
+			"fps": 24,
+			"name": "REIMU_MISSright",
+			"indices": []
+		},
+		{
+			"offsets": [
+				280,
+				70
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "dodge",
+			"indices": [],
+			"name": "REIMU_dodge"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-13,
+				211
+			],
+			"anim": "firstDeath",
+			"fps": 24,
+			"name": "REIMU_death",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				-74,
+				-208
+			],
+			"anim": "deathLoop",
+			"fps": 24,
+			"name": "Continue",
+			"indices": [
+				0,
+				0
+			]
+		},
+		{
+			"loop": false,
+			"offsets": [
+				12,
+				-109
+			],
+			"anim": "deathConfirm",
+			"fps": 24,
+			"name": "ContinueConfirm",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/REIMU_NIGHTplayable",
+	"position": [
+		0,
+		350
+	],
+	"healthicon": "reimu",
+	"flip_x": true,
+	"healthbar_colors": [
+		215,
+		40,
+		60
+	],
+	"camera_position": [
+		110,
+		100
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

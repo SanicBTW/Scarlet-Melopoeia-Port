@@ -1,59 +1,59 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				-10,
 				-60
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "RUMIA_idle"
+			"fps": 24,
+			"name": "RUMIA_idle",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				20,
 				-53
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "RUMIA_leftSING"
+			"fps": 24,
+			"name": "RUMIA_leftSING",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-50,
 				-90
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "RUMIA_rightSING"
+			"fps": 24,
+			"name": "RUMIA_rightSING",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-20,
 				-160
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "RUMIA_downSING"
+			"fps": 24,
+			"name": "RUMIA_downSING",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-46,
 				11
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "RUMIA_upSING"
+			"fps": 24,
+			"name": "RUMIA_upSING",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
@@ -65,9 +65,9 @@
 	"healthicon": "rumia",
 	"flip_x": false,
 	"healthbar_colors": [
-		216,
+		76,
 		85,
-		142
+		102
 	],
 	"camera_position": [
 		60,

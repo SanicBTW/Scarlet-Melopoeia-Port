@@ -1,0 +1,32 @@
+{
+	"storyName": "",
+	"difficulties": "Hard",
+	"hideFreeplay": false,
+	"weekBackground": "",
+	"weekBefore": "",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": true,
+	"hideStoryMode": true,
+	"songs": [
+		[
+			"Funky Patrol",
+			"patrolCirno",
+			[
+				106,
+				93,
+				253
+			]
+		]
+	],
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"hiddenUntilUnlocked": true,
+	"weekName": "Bonus Songs"
+}

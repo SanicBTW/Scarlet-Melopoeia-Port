@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="spell-cards-rumia.png">
+	<!-- Created with Adobe Animate version 21.0.6.41649 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="spell10000" x="0" y="0" width="423" height="59"/>
+	<SubTexture name="spell10001" x="0" y="59" width="420" height="59" frameX="-2" frameY="0" frameWidth="423" frameHeight="59"/>
+	<SubTexture name="spell10002" x="0" y="118" width="418" height="59" frameX="-3" frameY="0" frameWidth="423" frameHeight="59"/>
+	<SubTexture name="spell10003" x="0" y="177" width="416" height="59" frameX="-4" frameY="0" frameWidth="423" frameHeight="59"/>
+	<SubTexture name="spell10004" x="0" y="236" width="415" height="59" frameX="-4" frameY="0" frameWidth="423" frameHeight="59"/>
+	<SubTexture name="spell10005" x="0" y="295" width="415" height="59" frameX="-4" frameY="0" frameWidth="423" frameHeight="59"/>
+	<SubTexture name="spell10006" x="0" y="295" width="415" height="59" frameX="-4" frameY="0" frameWidth="423" frameHeight="59"/>
+	<SubTexture name="spell10007" x="0" y="295" width="415" height="59" frameX="-4" frameY="0" frameWidth="423" frameHeight="59"/>
+	<SubTexture name="spell10008" x="0" y="295" width="415" height="59" frameX="-4" frameY="0" frameWidth="423" frameHeight="59"/>
+	<SubTexture name="spell10009" x="0" y="295" width="415" height="59" frameX="-4" frameY="0" frameWidth="423" frameHeight="59"/>
+	<SubTexture name="spell10010" x="0" y="295" width="415" height="59" frameX="-4" frameY="0" frameWidth="423" frameHeight="59"/>
+	<SubTexture name="spell10011" x="0" y="295" width="415" height="59" frameX="-4" frameY="0" frameWidth="423" frameHeight="59"/>
+</TextureAtlas>

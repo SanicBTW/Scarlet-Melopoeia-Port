@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="COUPLE_vibe.png">
+	<!-- Created with Adobe Animate version 21.0.6.41649 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="COUPLE_confirmContinue0000" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0001" x="0" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0002" x="0" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0003" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0004" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0005" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0006" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0007" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0008" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0009" x="414" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0010" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0011" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0012" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0013" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0014" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0015" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0016" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0017" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0018" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0019" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0020" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0021" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0022" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0023" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0024" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0025" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0026" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0027" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0028" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0029" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0030" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0031" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0032" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_confirmContinue0033" x="828" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_continue0000" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0000" x="1242" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0001" x="1242" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0002" x="1242" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0003" x="1242" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0004" x="1242" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0005" x="1242" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0006" x="1242" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0007" x="1242" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0008" x="1242" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0009" x="1242" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0010" x="1242" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0011" x="1242" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0012" x="1242" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0013" x="1242" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0014" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0015" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0016" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0017" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0018" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0019" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0020" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0021" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0022" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0023" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0024" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0025" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0026" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0027" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0028" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0029" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0030" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0031" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0032" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0033" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0034" x="1656" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0035" x="2070" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0036" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0037" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0038" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0039" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0040" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0041" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0042" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0043" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0044" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0045" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0046" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0047" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0048" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0049" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0050" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0051" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0052" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0053" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0054" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0055" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0056" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_death0057" x="2484" y="0" width="414" height="746"/>
+	<SubTexture name="COUPLE_vibe0000" x="2898" y="0" width="666" height="618" frameX="-65" frameY="-63" frameWidth="797" frameHeight="753"/>
+	<SubTexture name="COUPLE_vibe0001" x="0" y="746" width="690" height="642" frameX="-53" frameY="-51" frameWidth="797" frameHeight="753"/>
+	<SubTexture name="COUPLE_vibe0002" x="690" y="746" width="709" height="663" frameX="-44" frameY="-40" frameWidth="797" frameHeight="753"/>
+	<SubTexture name="COUPLE_vibe0003" x="1399" y="746" width="729" height="683" frameX="-34" frameY="-30" frameWidth="797" frameHeight="753"/>
+	<SubTexture name="COUPLE_vibe0004" x="2128" y="746" width="742" height="706" frameX="-27" frameY="-16" frameWidth="797" frameHeight="753"/>
+	<SubTexture name="COUPLE_vibe0005" x="2870" y="746" width="756" height="720" frameX="-20" frameY="-9" frameWidth="797" frameHeight="753"/>
+	<SubTexture name="COUPLE_vibe0006" x="0" y="1466" width="769" height="728" frameX="-14" frameY="-9" frameWidth="797" frameHeight="753"/>
+	<SubTexture name="COUPLE_vibe0007" x="769" y="1466" width="779" height="738" frameX="-9" frameY="-4" frameWidth="797" frameHeight="753"/>
+	<SubTexture name="COUPLE_vibe0008" x="1548" y="1466" width="785" height="741" frameX="-6" frameY="-6" frameWidth="797" frameHeight="753"/>
+	<SubTexture name="COUPLE_vibe0009" x="2333" y="1466" width="791" height="747" frameX="-3" frameY="-3" frameWidth="797" frameHeight="753"/>
+	<SubTexture name="COUPLE_vibe0010" x="3124" y="1466" width="795" height="751" frameX="-1" frameY="-1" frameWidth="797" frameHeight="753"/>
+	<SubTexture name="COUPLE_vibe0011" x="0" y="2217" width="797" height="753"/>
+</TextureAtlas>

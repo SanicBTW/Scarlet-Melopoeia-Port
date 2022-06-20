@@ -1,0 +1,34 @@
+{
+	"song": {
+		"speed": 2.5,
+		"stage": "patrol",
+		"player1": "PatrolCIRNO",
+		"player2": "PatrolREMI",
+		"player3": null,
+		"events": [
+			[
+				65250,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"dad"
+					],
+					[
+						"Play Animation",
+						"dodge",
+						"BF"
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": "noteSplashes",
+		"validScore": false,
+		"gfVersion": "noRGF",
+		"bpm": 160,
+		"arrowSkin": "",
+		"needsVoices": true,
+		"song": "funky-patrol"
+	}
+}

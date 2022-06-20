@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "COUPLE_vibe",
+			"indices": []
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "sad",
+			"loop": false,
+			"name": "COUPLE_vibe"
+		},
+		{
+			"offsets": [
+				-175,
+				40
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "firstDeath",
+			"loop": false,
+			"name": "COUPLE_death"
+		},
+		{
+			"offsets": [
+				-175,
+				40
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "deathLoop",
+			"loop": false,
+			"name": "COUPLE_continue"
+		},
+		{
+			"offsets": [
+				-175,
+				40
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "deathConfirm",
+			"loop": false,
+			"name": "COUPLE_confirmContinue"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/COUPLE_vibe",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "rgf",
+	"flip_x": false,
+	"healthbar_colors": [
+		205,
+		40,
+		40
+	],
+	"camera_position": [
+		20,
+		40
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

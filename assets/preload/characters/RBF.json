@@ -1,150 +1,150 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				-85,
 				-10
 			],
-			"anim": "idle",
+			"loop": false,
 			"fps": 24,
-			"name": "RBF_idle",
-			"indices": []
+			"anim": "idle",
+			"indices": [],
+			"name": "RBF_idle"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-55,
 				-16
 			],
-			"anim": "singLEFT",
+			"loop": false,
 			"fps": 24,
-			"name": "RBF_LEFTSing",
-			"indices": []
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "RBF_LEFTSing"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-100,
 				-80
 			],
-			"anim": "singDOWN",
+			"loop": false,
 			"fps": 24,
-			"name": "RBF_DOWNSing",
-			"indices": []
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "RBF_DOWNSing"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-129,
 				47
 			],
-			"anim": "singUP",
+			"loop": false,
 			"fps": 24,
-			"name": "RBF_UPSing",
-			"indices": []
+			"anim": "singUP",
+			"indices": [],
+			"name": "RBF_UPSing"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-108,
 				-7
 			],
-			"anim": "singRIGHT",
+			"loop": false,
 			"fps": 24,
-			"name": "RBF_RIGHTSing",
-			"indices": []
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "RBF_RIGHTSing"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-33,
 				-11
 			],
-			"anim": "singLEFTmiss",
+			"loop": false,
 			"fps": 24,
-			"name": "RBF_LEFTMiss",
-			"indices": []
+			"anim": "singLEFTmiss",
+			"indices": [],
+			"name": "RBF_LEFTMiss"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-86,
 				-80
 			],
-			"anim": "singDOWNmiss",
+			"loop": false,
 			"fps": 24,
-			"name": "RBF_DOWNMiss",
-			"indices": []
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "RBF_DOWNMiss"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-127,
 				47
 			],
-			"anim": "singUPmiss",
+			"loop": false,
 			"fps": 24,
-			"name": "RBF_UPMiss",
-			"indices": []
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "RBF_UPMiss"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-104,
 				-8
 			],
-			"anim": "singRIGHTmiss",
+			"loop": false,
 			"fps": 24,
-			"name": "RBF_RIGHTMiss",
-			"indices": []
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "RBF_RIGHTMiss"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-33,
 				41
 			],
-			"anim": "firstDeath",
+			"loop": false,
 			"fps": 24,
-			"name": "RBF_death",
-			"indices": []
+			"anim": "firstDeath",
+			"indices": [],
+			"name": "RBF_death"
 		},
 		{
-			"loop": true,
 			"offsets": [
 				-35,
 				-172
 			],
-			"anim": "deathLoop",
+			"loop": true,
 			"fps": 24,
-			"name": "Continue",
+			"anim": "deathLoop",
 			"indices": [
 				0,
 				1
-			]
+			],
+			"name": "Continue"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				51,
 				-73
 			],
-			"anim": "deathConfirm",
+			"loop": false,
 			"fps": 24,
-			"name": "ContinueConfirm",
-			"indices": []
+			"anim": "deathConfirm",
+			"indices": [],
+			"name": "ContinueConfirm"
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-125,
 				65
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "dodge",
-			"indices": [],
-			"name": "RBF_dodge"
+			"fps": 24,
+			"name": "RBF_dodge",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
@@ -156,9 +156,9 @@
 	"healthicon": "rbf",
 	"flip_x": true,
 	"healthbar_colors": [
-		49,
-		176,
-		209
+		69,
+		136,
+		255
 	],
 	"camera_position": [
 		0,

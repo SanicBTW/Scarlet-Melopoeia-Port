@@ -1,0 +1,221 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-3,
+				5
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "hey",
+			"indices": [],
+			"name": "BF HEY"
+		},
+		{
+			"offsets": [
+				14,
+				18
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "hurt",
+			"indices": [],
+			"name": "BF hit"
+		},
+		{
+			"offsets": [
+				-4,
+				0
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "scared",
+			"indices": [],
+			"name": "BF idle shaking"
+		},
+		{
+			"offsets": [
+				294,
+				267
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "attack",
+			"indices": [],
+			"name": "boyfriend attack"
+		},
+		{
+			"offsets": [
+				-40,
+				-40
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "pre-attack",
+			"indices": [],
+			"name": "bf pre attack"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-115,
+				30
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "CIRNO_idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				25,
+				-16
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "CIRNO_leftSING",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-100,
+				-21
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "CIRNO_downSING",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-96,
+				37
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "CIRNO_upSING",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-148,
+				13
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "CIRNO_rightSING",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				27,
+				-17
+			],
+			"anim": "singLEFTmiss",
+			"fps": 24,
+			"name": "CIRNO_leftMISS",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-105,
+				-19
+			],
+			"anim": "singDOWNmiss",
+			"fps": 24,
+			"name": "CIRNO_downMISS",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-96,
+				37
+			],
+			"anim": "singUPmiss",
+			"fps": 24,
+			"name": "CIRNO_upMISS",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-154,
+				12
+			],
+			"anim": "singRIGHTmiss",
+			"fps": 24,
+			"name": "CIRNO_rightMISS",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				17,
+				81
+			],
+			"anim": "firstDeath",
+			"fps": 24,
+			"name": "CIRNO_death",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				-77,
+				-2
+			],
+			"anim": "deathLoop",
+			"fps": 24,
+			"name": "CIRNO_continue",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-77,
+				-2
+			],
+			"anim": "deathConfirm",
+			"fps": 24,
+			"name": "CIRNO_confirmContinue",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-158,
+				13
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "dodge",
+			"loop": false,
+			"name": "CIRNO_dodge"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/PatrolCIRNO",
+	"position": [
+		0,
+		350
+	],
+	"healthicon": "patrolcirno",
+	"flip_x": true,
+	"healthbar_colors": [
+		130,
+		181,
+		255
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1
+}
