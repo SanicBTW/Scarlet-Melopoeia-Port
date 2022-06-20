@@ -428,6 +428,7 @@ class PlayState extends MusicBeatState
 				add(subway);
 			case "shrine":
 				GameOverSubstate.characterName = "RBF";
+				GameOverSubstate.deathSoundName = "fnf_loss_touhou";
 
 				var shrine_sky = new BGSprite("shrine/shrine_sky", -600, -250);
 				shrine_sky.scrollFactor.set(0.1, 0.1);
@@ -463,6 +464,21 @@ class PlayState extends MusicBeatState
 					REIMUorb.animation.play("idle");
 					add(REIMUorb);
 				}
+			case "entrance":
+				var entrance_nightsky = new BGSprite('entrance/entrance_nightsky', -600, -550);
+				entrance_nightsky.scrollFactor.set(0.05, 0.05);
+				var entrance_mountains = new BGSprite('entrance/entrance_mountains', -600, -350);
+				entrance_mountains.scrollFactor.set(0.1, 0.1);
+				var entrance_trees = new BGSprite('entrance/entrance_trees', -600, -450);
+				entrance_trees.scrollFactor.set(0.3, 0.3);
+				var entrance_ground = new BGSprite('entrance/entrance_ground', -600, -250);
+				entrance_ground.scrollFactor.set(0.95, 0.95);
+
+				add(entrance_nightsky);
+				add(entrance_mountains);
+				add(entrance_trees);
+				add(entrance_ground);
+
 		}
 
 		if(isPixelStage) {
@@ -4532,12 +4548,16 @@ class PlayState extends MusicBeatState
 
 	function onCreatePost()
 	{
-		camHUD.alpha = 0;
-		iconP1.alpha = 0;
-		iconP2.alpha = 0;
-		gf.alpha = 0;
-		subway.alpha = 0;
-		tunnelLight.alpha = 0;
-		camGame.shake(0.00075, 115.99);
+		switch(curStage)
+		{
+			case "subway":
+				camHUD.alpha = 0;
+				iconP1.alpha = 0;
+				iconP2.alpha = 0;
+				gf.alpha = 0;
+				subway.alpha = 0;
+				tunnelLight.alpha = 0;
+				camGame.shake(0.00075, 115.99);
+		}
 	}
 }
