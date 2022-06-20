@@ -288,6 +288,10 @@ class PlayState extends MusicBeatState
 
 	var REIMUorb:FlxSprite;
 
+	var rumia_fog:FlxSprite;
+	var sign:FlxSprite;
+	var laser:FlxSprite;
+
 	override public function create()
 	{
         #if MODS_ALLOWED
@@ -465,6 +469,9 @@ class PlayState extends MusicBeatState
 					add(REIMUorb);
 				}
 			case "entrance":
+				GameOverSubstate.characterName = "REIMUnight-player";
+				GameOverSubstate.deathSoundName = "fnf_loss_touhou";
+
 				var entrance_nightsky = new BGSprite('entrance/entrance_nightsky', -600, -550);
 				entrance_nightsky.scrollFactor.set(0.05, 0.05);
 				var entrance_mountains = new BGSprite('entrance/entrance_mountains', -600, -350);
@@ -474,11 +481,34 @@ class PlayState extends MusicBeatState
 				var entrance_ground = new BGSprite('entrance/entrance_ground', -600, -250);
 				entrance_ground.scrollFactor.set(0.95, 0.95);
 
+				rumia_fog = new FlxSprite(-500, -1500);
+				rumia_fog.frames = Paths.getSparrowAtlas('entrance/rumia_fog');
+				rumia_fog.animation.addByPrefix("fog", "rumia_fog", 24, true);
+				rumia_fog.scrollFactor.set(0.05, 0);
+				rumia_fog.scale.set(1.5, 1.5);
+
+				sign = new FlxSprite(420, 100);
+				sign.frames = Paths.getSparrowAtlas("entrance/spell-cards-rumia");
+				sign.animation.addByPrefix("demarcation", "spell", 24, false);
+				sign.alpha = 0;
+				sign.scrollFactor.set(0, 0);
+
+				laser = new FlxSprite(700, 700);
+				laser.frames = Paths.getSparrowAtlas("entrance/RUMIA-laser");
+				laser.animation.addByPrefix("idle", "RUMIA-laserIdle", 24, false);
+				laser.animation.addByPrefix("fire", "RUMIA-laserFire", 24, false);
+				laser.alpha = 0;
+
 				add(entrance_nightsky);
 				add(entrance_mountains);
 				add(entrance_trees);
 				add(entrance_ground);
 
+				add(rumia_fog);
+				rumia_fog.visible = false;
+
+				add(sign);
+				add(laser);
 		}
 
 		if(isPixelStage) {
@@ -505,6 +535,8 @@ class PlayState extends MusicBeatState
 		if(gfVersion == null || gfVersion.length < 1) {
 			switch (curStage)
 			{
+				case "entrance":
+					gfVersion = "noRGF";
 				case "subway":
 					gfVersion = "couple";
 				case "shrine":
@@ -916,6 +948,9 @@ class PlayState extends MusicBeatState
 			CoolUtil.precacheSound('Tick'); 
 			FlxG.sound.play(Paths.sound('Tick'), 0); 
 		}
+		CoolUtil.precacheSound("laserCharge");
+		CoolUtil.precacheSound("laserFire");
+		CoolUtil.precacheSound('graze');
 		#if desktop
 		// Updating Discord Rich Presence.
 			DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
@@ -1748,118 +1783,14 @@ class PlayState extends MusicBeatState
 
 		callOnLuas('onUpdate', [elapsed]);
 
-		switch (curStage)
+		if(candodge == true && FlxG.keys.justPressed.SPACE)
 		{
-			case 'tank':
-				moveTank(elapsed);
-			case 'schoolEvil':
-				if(!ClientPrefs.lowQuality && bgGhouls.animation.curAnim.finished) {
-					bgGhouls.visible = false;
-				}
-			case 'philly':
-				if (trainMoving)
-				{
-					trainFrameTiming += elapsed;
-
-					if (trainFrameTiming >= 1 / 24)
-					{
-						updateTrainPos();
-						trainFrameTiming = 0;
-					}
-				}
-				phillyCityLights.members[curLight].alpha -= (Conductor.crochet / 1000) * FlxG.elapsed * 1.5;
-			case 'limo':
-				if(!ClientPrefs.lowQuality) {
-					grpLimoParticles.forEach(function(spr:BGSprite) {
-						if(spr.animation.curAnim.finished) {
-							spr.kill();
-							grpLimoParticles.remove(spr, true);
-							spr.destroy();
-						}
-					});
-
-					switch(limoKillingState) {
-						case 1:
-							limoMetalPole.x += 5000 * elapsed;
-							limoLight.x = limoMetalPole.x - 180;
-							limoCorpse.x = limoLight.x - 50;
-							limoCorpseTwo.x = limoLight.x + 35;
-
-							var dancers:Array<BackgroundDancer> = grpLimoDancers.members;
-							for (i in 0...dancers.length) {
-								if(dancers[i].x < FlxG.width * 1.5 && limoLight.x > (370 * i) + 130) {
-									switch(i) {
-										case 0 | 3:
-											if(i == 0) FlxG.sound.play(Paths.sound('dancerdeath'), 0.5);
-
-											var diffStr:String = i == 3 ? ' 2 ' : ' ';
-											var particle:BGSprite = new BGSprite('gore/noooooo', dancers[i].x + 200, dancers[i].y, 0.4, 0.4, ['hench leg spin' + diffStr + 'PINK'], false);
-											grpLimoParticles.add(particle);
-											var particle:BGSprite = new BGSprite('gore/noooooo', dancers[i].x + 160, dancers[i].y + 200, 0.4, 0.4, ['hench arm spin' + diffStr + 'PINK'], false);
-											grpLimoParticles.add(particle);
-											var particle:BGSprite = new BGSprite('gore/noooooo', dancers[i].x, dancers[i].y + 50, 0.4, 0.4, ['hench head spin' + diffStr + 'PINK'], false);
-											grpLimoParticles.add(particle);
-
-											var particle:BGSprite = new BGSprite('gore/stupidBlood', dancers[i].x - 110, dancers[i].y + 20, 0.4, 0.4, ['blood'], false);
-											particle.flipX = true;
-											particle.angle = -57.5;
-											grpLimoParticles.add(particle);
-										case 1:
-											limoCorpse.visible = true;
-										case 2:
-											limoCorpseTwo.visible = true;
-									} //Note: Nobody cares about the fifth dancer because he is mostly hidden offscreen :(
-									dancers[i].x += FlxG.width * 2;
-								}
-							}
-
-							if(limoMetalPole.x > FlxG.width * 2) {
-								resetLimoKill();
-								limoSpeed = 800;
-								limoKillingState = 2;
-							}
-
-						case 2:
-							limoSpeed -= 4000 * elapsed;
-							bgLimo.x -= limoSpeed * elapsed;
-							if(bgLimo.x > FlxG.width * 1.5) {
-								limoSpeed = 3000;
-								limoKillingState = 3;
-							}
-
-						case 3:
-							limoSpeed -= 2000 * elapsed;
-							if(limoSpeed < 1000) limoSpeed = 1000;
-
-							bgLimo.x -= limoSpeed * elapsed;
-							if(bgLimo.x < -275) {
-								limoKillingState = 4;
-								limoSpeed = 800;
-							}
-
-						case 4:
-							bgLimo.x = FlxMath.lerp(bgLimo.x, -150, CoolUtil.boundTo(elapsed * 9, 0, 1));
-							if(Math.round(bgLimo.x) == -150) {
-								bgLimo.x = -150;
-								limoKillingState = 0;
-							}
-					}
-
-					if(limoKillingState > 2) {
-						var dancers:Array<BackgroundDancer> = grpLimoDancers.members;
-						for (i in 0...dancers.length) {
-							dancers[i].x = (370 * i) + bgLimo.x + 280;
-						}
-					}
-				}
-			case 'mall':
-				if(heyTimer > 0) {
-					heyTimer -= elapsed;
-					if(heyTimer <= 0) {
-						bottomBoppers.dance(true);
-						heyTimer = 0;
-					}
-				}
+			dodged = true;
+			FlxG.sound.play(Paths.sound("graze"), 0.25);
+			boyfriend.playAnim("dodge", true);
+			boyfriend.specialAnim = true;
+			remove(warning);
+			candodge = false;
 		}
 
 		if(!inCutscene) {
@@ -1951,6 +1882,8 @@ class PlayState extends MusicBeatState
 		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
 		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset);
 
+		if (health > 2)
+			health = 2;
 		/*
 		if (!ClientPrefs.tabi)
                 {
@@ -3902,6 +3835,34 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		if(curStage == "entrance")
+		{
+			switch(curStep)
+			{
+				case 132:
+					FlxTween.tween(laser, {alpha: 1}, 1, {ease: FlxEase.linear});
+					FlxG.sound.play(Paths.sound("laserCharge"), 0.25);
+				case 136:
+					dodge(0.85);
+				case 144:
+					laser.animation.play("fire");
+					FlxG.sound.play(Paths.sound("laserFire"), 0.1);
+				case 146:
+					rumia_fog.visible = false;
+					FlxTween.tween(sign, {alpha: 0}, 1.5, {ease: FlxEase.linear});
+					FlxTween.tween(laser, {alpha: 0}, 1, {ease: FlxEase.linear});
+				case 680:
+					dad.playAnim("reveal", true);
+					dad.idleSuffix = "-alt";
+					dad.recalculateDanceIdle();
+					addcamzoom(0.25, 0.09);
+				case 688:
+					rumia_fog.visible = true;
+					FlxTween.tween(sign, {alpha: 1}, 1.5, {ease: FlxEase.linear});
+					addcamzoom(0.5, 0.09);
+			}
+		}
+
 		lastStepHit = curStep;
 		setOnLuas('curStep', curStep);
 		callOnLuas('onStepHit', []);
@@ -4004,6 +3965,11 @@ class PlayState extends MusicBeatState
 					{
 						REIMUorb.animation.play("idle");
 					}
+				}
+			case "entrance":
+				if(curBeat % 2 == 0)
+				{
+					sign.animation.play("demarcation");
 				}
 		}
 
@@ -4557,7 +4523,47 @@ class PlayState extends MusicBeatState
 				gf.alpha = 0;
 				subway.alpha = 0;
 				tunnelLight.alpha = 0;
-				camGame.shake(0.00075, 115.99);
+				camGame.shake(0.00075, 115.99);		
+			case "entrance":
+				warning = new FlxSprite(9999, 9999);
+				warning.frames = Paths.getSparrowAtlas("RUMIA-warning");
+				warning.animation.addByPrefix("warning", "warning", 25, true);
+				warning.cameras = [camOther];
+				warning.scale.set(0.50, 0.50);
 		}
+	}
+
+	var dodged = false;
+	var candodge = false;
+	var dodgetime:Float = 0;
+	var warning:FlxSprite;
+	var died = new FlxTimer();
+	function dodge(time:Float)
+	{
+		dodgetime = time;
+		warning.x = 440;
+		warning.y = 200;
+		warning.animation.play("warning");
+		add(warning);
+		FlxG.sound.play(Paths.sound("warning"));
+		candodge = true;
+		died.start(dodgetime, timer -> ({
+			if(dodged == false){
+				health = 0;
+			} else if(dodged == true){
+				dodged = false;
+			}
+		}));
+	}
+
+	function addcamzoom(value1:Float, value2:Float)
+	{
+		var camZoom:Float = value1;
+		var hudZoom:Float = value2;
+		if(Math.isNaN(camZoom)) camZoom = 0.015;
+		if(Math.isNaN(hudZoom)) hudZoom = 0.03;
+
+		FlxG.camera.zoom += camZoom;
+		camHUD.zoom += hudZoom;
 	}
 }
