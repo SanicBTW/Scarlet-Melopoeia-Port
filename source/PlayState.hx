@@ -282,6 +282,7 @@ class PlayState extends MusicBeatState
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
 
 	var precacheList:Map<String, String> = new Map<String, String>();
+	var REIMUorb:FlxSprite;
 
 	override public function create()
 	{
@@ -477,27 +478,6 @@ class PlayState extends MusicBeatState
 			startCharacterPos(gf);
 			gf.scrollFactor.set(0.95, 0.95);
 			gfGroup.add(gf);
-
-			if(SONG.player3 == 'pico-speaker')
-			{
-				if(!ClientPrefs.lowQuality)
-				{
-					var firstTank:TankmenBG = new TankmenBG(20, 500, true);
-					firstTank.resetShit(20, 600, true);
-					firstTank.strumTime = 10;
-					tankmanRun.add(firstTank);
-
-					for (i in 0...TankmenBG.animationNotes.length)
-					{
-						if(FlxG.random.bool(16)) {
-							var tankBih = tankmanRun.recycle(TankmenBG);
-							tankBih.strumTime = TankmenBG.animationNotes[i][0];
-							tankBih.resetShit(500, 200 + FlxG.random.int(50, 100), TankmenBG.animationNotes[i][1] < 2);
-							tankmanRun.add(tankBih);
-						}
-					}
-				}
-			}
 		}
 
 		dad = new Character(0, 0, SONG.player2);
@@ -519,17 +499,6 @@ class PlayState extends MusicBeatState
 			dad.setPosition(GF_X, GF_Y);
 			if(gf != null)
 				gf.visible = false;
-		}
-
-		switch(curStage)
-		{
-			case 'limo':
-				resetFastCar();
-				insert(members.indexOf(gfGroup) - 1, fastCar);
-			
-			case 'schoolEvil':
-				var evilTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069); //nice
-				insert(members.indexOf(dadGroup) - 1, evilTrail);
 		}
 
 		var file:String = Paths.json(songName + '/dialogue'); //Checks for json/Psych Engine dialogue
