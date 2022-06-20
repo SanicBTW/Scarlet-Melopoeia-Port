@@ -780,7 +780,7 @@ class PreferencesSubstate extends MusicBeatSubstate
 				daText = "Changes how late a note is spawned.\nUseful for preventing audio lag from wireless earphones.";
 
 			case 'Constant Dodging':
-				daText = "If enabled, you will have to constantly dodge, easy";
+				daText = "If enabled, you will have to constantly dodge, easy BUGGY ATM";
 			case 'Vine Boom SFX':
 				daText = "When dodging a vine boom sfx will play";
 		}
