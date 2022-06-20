@@ -180,9 +180,6 @@ class PlayState extends MusicBeatState
 	public static var changedDifficulty:Bool = false;
 	public static var cpuControlled:Bool = false;
 	var runCutscene:Bool = false;
-	//lane underlay stuff
-        public var laneunderlay:FlxSprite;
-        public var laneunderlayOpponent:FlxSprite; //buggy
 
 	var botplaySine:Float = 0;
 	var botplayTxt:FlxText;
@@ -1135,8 +1132,6 @@ class PlayState extends MusicBeatState
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
-		laneunderlayOpponent.cameras = [camHUD];
-                laneunderlay.cameras = [camHUD];
 		botplayTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
@@ -1534,17 +1529,11 @@ class PlayState extends MusicBeatState
 		inCutscene = false;
 		var ret:Dynamic = callOnLuas('onStartCountdown', []);
 		if(ret != FunkinLua.Function_Stop) {
-                        #if mobileC
-		        mcontrols.visible = true;
-		        #end
+            #if mobileC
+		    mcontrols.visible = true;
+		    #end
 			generateStaticArrows(0);
 			generateStaticArrows(1);
-
-			laneunderlay.x = playerStrums.members[0].x - 25;
-                        laneunderlayOpponent.x = opponentStrums.members[0].x - 25;
-
-                        laneunderlay.screenCenter(Y);
-                        laneunderlayOpponent.screenCenter(Y);
 
 			for (i in 0...playerStrums.length) {
 				setOnLuas('defaultPlayerStrumX' + i, playerStrums.members[i].x);

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="RUMIA.png">
+	<!-- Created with Adobe Animate version 21.0.6.41649 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="RUMIA_downSING0000" x="0" y="0" width="254" height="228" frameX="0" frameY="-7" frameWidth="254" frameHeight="235"/>
+	<SubTexture name="RUMIA_downSING0001" x="0" y="0" width="254" height="228" frameX="0" frameY="-7" frameWidth="254" frameHeight="235"/>
+	<SubTexture name="RUMIA_downSING0002" x="254" y="0" width="254" height="229" frameX="0" frameY="-6" frameWidth="254" frameHeight="235"/>
+	<SubTexture name="RUMIA_downSING0003" x="254" y="0" width="254" height="229" frameX="0" frameY="-6" frameWidth="254" frameHeight="235"/>
+	<SubTexture name="RUMIA_downSING0004" x="508" y="0" width="253" height="230" frameX="-1" frameY="-3" frameWidth="254" frameHeight="235"/>
+	<SubTexture name="RUMIA_downSING0005" x="508" y="0" width="253" height="230" frameX="-1" frameY="-3" frameWidth="254" frameHeight="235"/>
+	<SubTexture name="RUMIA_downSING0006" x="761" y="0" width="251" height="231" frameX="-3" frameY="0" frameWidth="254" frameHeight="235"/>
+	<SubTexture name="RUMIA_downSING0007" x="761" y="0" width="251" height="231" frameX="-3" frameY="0" frameWidth="254" frameHeight="235"/>
+	<SubTexture name="RUMIA_downSING0008" x="1012" y="0" width="250" height="231" frameX="-3" frameY="0" frameWidth="254" frameHeight="235"/>
+	<SubTexture name="RUMIA_downSING0009" x="1012" y="0" width="250" height="231" frameX="-3" frameY="0" frameWidth="254" frameHeight="235"/>
+	<SubTexture name="RUMIA_downSING0010" x="1012" y="0" width="250" height="231" frameX="-3" frameY="0" frameWidth="254" frameHeight="235"/>
+	<SubTexture name="RUMIA_downSING0011" x="1012" y="0" width="250" height="231" frameX="-3" frameY="0" frameWidth="254" frameHeight="235"/>
+	<SubTexture name="RUMIA_idle0000" x="1262" y="0" width="241" height="310" frameX="0" frameY="-3" frameWidth="243" frameHeight="313"/>
+	<SubTexture name="RUMIA_idle0001" x="1262" y="0" width="241" height="310" frameX="0" frameY="-3" frameWidth="243" frameHeight="313"/>
+	<SubTexture name="RUMIA_idle0002" x="1503" y="0" width="241" height="309" frameX="0" frameY="-3" frameWidth="243" frameHeight="313"/>
+	<SubTexture name="RUMIA_idle0003" x="1503" y="0" width="241" height="309" frameX="0" frameY="-3" frameWidth="243" frameHeight="313"/>
+	<SubTexture name="RUMIA_idle0004" x="1744" y="0" width="239" height="309" frameX="-3" frameY="-1" frameWidth="243" frameHeight="313"/>
+	<SubTexture name="RUMIA_idle0005" x="1744" y="0" width="239" height="309" frameX="-3" frameY="-1" frameWidth="243" frameHeight="313"/>
+	<SubTexture name="RUMIA_idle0006" x="0" y="310" width="237" height="309" frameX="-6" frameY="0" frameWidth="243" frameHeight="313"/>
+	<SubTexture name="RUMIA_idle0007" x="0" y="310" width="237" height="309" frameX="-6" frameY="0" frameWidth="243" frameHeight="313"/>
+	<SubTexture name="RUMIA_idle0008" x="237" y="310" width="237" height="308" frameX="-6" frameY="0" frameWidth="243" frameHeight="313"/>
+	<SubTexture name="RUMIA_idle0009" x="237" y="310" width="237" height="308" frameX="-6" frameY="0" frameWidth="243" frameHeight="313"/>
+	<SubTexture name="RUMIA_idle0010" x="237" y="310" width="237" height="308" frameX="-6" frameY="0" frameWidth="243" frameHeight="313"/>
+	<SubTexture name="RUMIA_idle0011" x="237" y="310" width="237" height="308" frameX="-6" frameY="0" frameWidth="243" frameHeight="313"/>
+	<SubTexture name="RUMIA_leftSING0000" x="474" y="310" width="237" height="308" frameX="0" frameY="-6" frameWidth="246" frameHeight="318"/>
+	<SubTexture name="RUMIA_leftSING0001" x="474" y="310" width="237" height="308" frameX="0" frameY="-6" frameWidth="246" frameHeight="318"/>
+	<SubTexture name="RUMIA_leftSING0002" x="711" y="310" width="236" height="307" frameX="-1" frameY="-5" frameWidth="246" frameHeight="318"/>
+	<SubTexture name="RUMIA_leftSING0003" x="711" y="310" width="236" height="307" frameX="-1" frameY="-5" frameWidth="246" frameHeight="318"/>
+	<SubTexture name="RUMIA_leftSING0004" x="947" y="310" width="235" height="309" frameX="-6" frameY="-3" frameWidth="246" frameHeight="318"/>
+	<SubTexture name="RUMIA_leftSING0005" x="947" y="310" width="235" height="309" frameX="-6" frameY="-3" frameWidth="246" frameHeight="318"/>
+	<SubTexture name="RUMIA_leftSING0006" x="1182" y="310" width="239" height="316" frameX="-5" frameY="0" frameWidth="246" frameHeight="318"/>
+	<SubTexture name="RUMIA_leftSING0007" x="1182" y="310" width="239" height="316" frameX="-5" frameY="0" frameWidth="246" frameHeight="318"/>
+	<SubTexture name="RUMIA_leftSING0008" x="1421" y="310" width="242" height="318" frameX="-4" frameY="0" frameWidth="246" frameHeight="318"/>
+	<SubTexture name="RUMIA_leftSING0009" x="1421" y="310" width="242" height="318" frameX="-4" frameY="0" frameWidth="246" frameHeight="318"/>
+	<SubTexture name="RUMIA_leftSING0010" x="1421" y="310" width="242" height="318" frameX="-4" frameY="0" frameWidth="246" frameHeight="318"/>
+	<SubTexture name="RUMIA_leftSING0011" x="1421" y="310" width="242" height="318" frameX="-4" frameY="0" frameWidth="246" frameHeight="318"/>
+	<SubTexture name="RUMIA_rightSING0000" x="1663" y="310" width="281" height="272"/>
+	<SubTexture name="RUMIA_rightSING0001" x="1663" y="310" width="281" height="272"/>
+	<SubTexture name="RUMIA_rightSING0002" x="0" y="628" width="279" height="271" frameX="0" frameY="0" frameWidth="281" frameHeight="272"/>
+	<SubTexture name="RUMIA_rightSING0003" x="0" y="628" width="279" height="271" frameX="0" frameY="0" frameWidth="281" frameHeight="272"/>
+	<SubTexture name="RUMIA_rightSING0004" x="279" y="628" width="274" height="270" frameX="0" frameY="0" frameWidth="281" frameHeight="272"/>
+	<SubTexture name="RUMIA_rightSING0005" x="279" y="628" width="274" height="270" frameX="0" frameY="0" frameWidth="281" frameHeight="272"/>
+	<SubTexture name="RUMIA_rightSING0006" x="553" y="628" width="269" height="268" frameX="0" frameY="0" frameWidth="281" frameHeight="272"/>
+	<SubTexture name="RUMIA_rightSING0007" x="553" y="628" width="269" height="268" frameX="0" frameY="0" frameWidth="281" frameHeight="272"/>
+	<SubTexture name="RUMIA_rightSING0008" x="822" y="628" width="267" height="268" frameX="0" frameY="0" frameWidth="281" frameHeight="272"/>
+	<SubTexture name="RUMIA_rightSING0009" x="822" y="628" width="267" height="268" frameX="0" frameY="0" frameWidth="281" frameHeight="272"/>
+	<SubTexture name="RUMIA_rightSING0010" x="822" y="628" width="267" height="268" frameX="0" frameY="0" frameWidth="281" frameHeight="272"/>
+	<SubTexture name="RUMIA_rightSING0011" x="822" y="628" width="267" height="268" frameX="0" frameY="0" frameWidth="281" frameHeight="272"/>
+	<SubTexture name="RUMIA_upSING0000" x="1089" y="628" width="217" height="341" frameX="0" frameY="0" frameWidth="217" frameHeight="346"/>
+	<SubTexture name="RUMIA_upSING0001" x="1089" y="628" width="217" height="341" frameX="0" frameY="0" frameWidth="217" frameHeight="346"/>
+	<SubTexture name="RUMIA_upSING0002" x="1306" y="628" width="216" height="340" frameX="-1" frameY="-2" frameWidth="217" frameHeight="346"/>
+	<SubTexture name="RUMIA_upSING0003" x="1306" y="628" width="216" height="340" frameX="-1" frameY="-2" frameWidth="217" frameHeight="346"/>
+	<SubTexture name="RUMIA_upSING0004" x="1522" y="628" width="215" height="337" frameX="-2" frameY="-7" frameWidth="217" frameHeight="346"/>
+	<SubTexture name="RUMIA_upSING0005" x="1522" y="628" width="215" height="337" frameX="-2" frameY="-7" frameWidth="217" frameHeight="346"/>
+	<SubTexture name="RUMIA_upSING0006" x="1737" y="628" width="213" height="333" frameX="-3" frameY="-13" frameWidth="217" frameHeight="346"/>
+	<SubTexture name="RUMIA_upSING0007" x="1737" y="628" width="213" height="333" frameX="-3" frameY="-13" frameWidth="217" frameHeight="346"/>
+	<SubTexture name="RUMIA_upSING0008" x="0" y="969" width="213" height="332" frameX="-3" frameY="-14" frameWidth="217" frameHeight="346"/>
+	<SubTexture name="RUMIA_upSING0009" x="0" y="969" width="213" height="332" frameX="-3" frameY="-14" frameWidth="217" frameHeight="346"/>
+	<SubTexture name="RUMIA_upSING0010" x="0" y="969" width="213" height="332" frameX="-3" frameY="-14" frameWidth="217" frameHeight="346"/>
+	<SubTexture name="RUMIA_upSING0011" x="0" y="969" width="213" height="332" frameX="-3" frameY="-14" frameWidth="217" frameHeight="346"/>
+</TextureAtlas>

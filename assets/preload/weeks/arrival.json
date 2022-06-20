@@ -1,0 +1,40 @@
+{
+	"storyName": "the maiden and her shrine",
+	"difficulties": "",
+	"hideFreeplay": false,
+	"weekBackground": "shrine",
+	"weekBefore": "tutorial",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": true,
+	"hideStoryMode": false,
+	"songs": [
+		[
+			"Eternal Pray",
+			"reimu",
+			[
+				226,
+				40,
+				40
+			]
+		],
+		[
+			"Mystical Maiden",
+			"reimu",
+			[
+				226,
+				40,
+				40
+			]
+		]
+	],
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"weekName": "Arrival"
+}

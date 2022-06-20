@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="REIMUorb_Assets.png">
+	<!-- Created with Adobe Animate version 21.0.6.41649 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="BLUE_REIMUorb0000" x="0" y="0" width="527" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="BLUE_REIMUorb0001" x="527" y="0" width="1184" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="BLUE_REIMUorb0002" x="0" y="193" width="1840" height="193"/>
+	<SubTexture name="BLUE_REIMUorb0003" x="1840" y="193" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="BLUE_REIMUorb0004" x="0" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="BLUE_REIMUorb0005" x="195" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="BLUE_REIMUorb0006" x="390" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="BLUE_REIMUorb0007" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="BLUE_REIMUorb0008" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="BLUE_REIMUorb0009" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="BLUE_REIMUorb0010" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="BLUE_REIMUorb0011" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="GREEN_REIMUorb0000" x="780" y="386" width="498" height="193" frameX="0" frameY="0" frameWidth="1782" frameHeight="193"/>
+	<SubTexture name="GREEN_REIMUorb0001" x="0" y="579" width="1140" height="193" frameX="0" frameY="0" frameWidth="1782" frameHeight="193"/>
+	<SubTexture name="GREEN_REIMUorb0002" x="0" y="772" width="1782" height="193"/>
+	<SubTexture name="GREEN_REIMUorb0003" x="1840" y="193" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="GREEN_REIMUorb0004" x="0" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="GREEN_REIMUorb0005" x="195" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="GREEN_REIMUorb0006" x="390" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="GREEN_REIMUorb0007" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="GREEN_REIMUorb0008" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="GREEN_REIMUorb0009" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="GREEN_REIMUorb0010" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="GREEN_REIMUorb0011" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="PURPLE_REIMUorb0000" x="0" y="965" width="506" height="193" frameX="0" frameY="0" frameWidth="1806" frameHeight="193"/>
+	<SubTexture name="PURPLE_REIMUorb0001" x="506" y="965" width="1156" height="193" frameX="0" frameY="0" frameWidth="1806" frameHeight="193"/>
+	<SubTexture name="PURPLE_REIMUorb0002" x="0" y="1158" width="1806" height="193"/>
+	<SubTexture name="PURPLE_REIMUorb0003" x="1840" y="193" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="PURPLE_REIMUorb0004" x="0" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="PURPLE_REIMUorb0005" x="195" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="PURPLE_REIMUorb0006" x="390" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="PURPLE_REIMUorb0007" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="PURPLE_REIMUorb0008" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="PURPLE_REIMUorb0009" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="PURPLE_REIMUorb0010" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="PURPLE_REIMUorb0011" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="RED_REIMUorb0000" x="0" y="1351" width="550" height="193" frameX="0" frameY="0" frameWidth="1956" frameHeight="193"/>
+	<SubTexture name="RED_REIMUorb0001" x="550" y="1351" width="1254" height="193" frameX="0" frameY="0" frameWidth="1956" frameHeight="193"/>
+	<SubTexture name="RED_REIMUorb0002" x="0" y="1544" width="1956" height="193"/>
+	<SubTexture name="RED_REIMUorb0003" x="1840" y="193" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="RED_REIMUorb0004" x="0" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="RED_REIMUorb0005" x="195" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="RED_REIMUorb0006" x="390" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="RED_REIMUorb0007" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="RED_REIMUorb0008" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="RED_REIMUorb0009" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="RED_REIMUorb0010" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="RED_REIMUorb0011" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="REIMUorb0000" x="0" y="1737" width="195" height="193"/>
+	<SubTexture name="REIMUorb0001" x="195" y="1737" width="195" height="193"/>
+	<SubTexture name="REIMUorb0002" x="390" y="1737" width="195" height="193"/>
+	<SubTexture name="REIMUorb0003" x="1840" y="193" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="REIMUorb0004" x="0" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="REIMUorb0005" x="195" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="REIMUorb0006" x="390" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="REIMUorb0007" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="REIMUorb0008" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="REIMUorb0009" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="REIMUorb0010" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+	<SubTexture name="REIMUorb0011" x="585" y="386" width="195" height="193" frameX="0" frameY="0" frameWidth="1840" frameHeight="193"/>
+</TextureAtlas>
