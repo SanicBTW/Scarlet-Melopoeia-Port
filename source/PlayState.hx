@@ -428,6 +428,19 @@ class PlayState extends MusicBeatState
 				add(shrine_treesback);
 				add(shrine_treesbody);
 				add(shrine_treesfront);
+
+				if(Paths.formatToSongPath(SONG.song) == "mystical-maiden")
+				{
+					REIMUorb = new FlxSprite(100, 550);
+					REIMUorb.frames = Paths.getSparrowAtlas('characters/REIMUorb_Assets');
+					REIMUorb.animation.addByPrefix("idle", 'REIMUorb', 24, false);
+					REIMUorb.animation.addByPrefix("0", 'PURPLE_REIMUorb', 24, false);
+					REIMUorb.animation.addByPrefix("1", 'BLUE_REIMUorb', 24, false);
+					REIMUorb.animation.addByPrefix("2", 'GREEN_REIMUorb', 24, false);
+					REIMUorb.animation.addByPrefix("3", 'RED_REIMUorb', 24, false);
+					REIMUorb.animation.play("idle");
+					add(REIMUorb);
+				}
 		}
 
 		if(isPixelStage) {
@@ -449,17 +462,6 @@ class PlayState extends MusicBeatState
 		add(luaDebugGroup);
 		#end
 
-		if(curStage == 'philly') {
-			phillyCityLightsEvent = new FlxTypedGroup<BGSprite>();
-			for (i in 0...5)
-			{
-				var light:BGSprite = new BGSprite('philly/win' + i, -10, 0, 0.3, 0.3);
-				light.visible = false;
-				light.setGraphicSize(Std.int(light.width * 0.85));
-				light.updateHitbox();
-				phillyCityLightsEvent.add(light);
-			}
-		}
 
 		var gfVersion:String = SONG.player3;
 		if(gfVersion == null || gfVersion.length < 1) {
@@ -3507,6 +3509,23 @@ class PlayState extends MusicBeatState
 						animToPlay = 'singRIGHT';
 				}
 
+				if(note.noteType == "REIMU-Bullet Note")
+				{
+					var dir = "0";
+					switch(Std.int(Math.abs(note.noteData)))
+					{
+						case 0:
+							dir = "0";
+						case 1:
+							dir = "1";
+						case 2:
+							dir = "2";
+						case 3:
+							dir = "3";
+					}
+					REIMUorb.animation.play(dir);
+				}
+
 				if(note.noteType == 'GF Sing') {
 					if(gf != null)
 					{
@@ -3555,7 +3574,7 @@ class PlayState extends MusicBeatState
 			var leData:Int = Math.round(Math.abs(note.noteData)); 
 			var leType:String = note.noteType; 
 //			if (camFocus == 'bf' && ClientPrefs.dynamicCam) 
-//				triggerCamMovement(Math.abs(note.noteData % 4));
+				//triggerCamMovement(Math.abs(note.noteData % 4));
 
 			callOnLuas('goodNoteHit', 
 			[notes.members.indexOf(note), leData, leType, isSus]);
@@ -3904,64 +3923,16 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
-			case 'tank':
-				if(!ClientPrefs.lowQuality) tankWatchtower.dance();
-				foregroundSprites.forEach(function(spr:BGSprite)
+			case "shrine":
+				if(Paths.formatToSongPath(SONG.song) == "mystical-maiden")
 				{
-					spr.dance();
-				});
-
-			case 'school':
-				if(!ClientPrefs.lowQuality) {
-					bgGirls.dance();
-				}
-
-			case 'mall':
-				if(!ClientPrefs.lowQuality) {
-					upperBoppers.dance(true);
-				}
-
-				if(heyTimer <= 0) bottomBoppers.dance(true);
-				santa.dance(true);
-
-			case 'limo':
-				if(!ClientPrefs.lowQuality) {
-					grpLimoDancers.forEach(function(dancer:BackgroundDancer)
+					if(curBeat % 2 == 0)
 					{
-						dancer.dance();
-					});
-				}
-
-				if (FlxG.random.bool(10) && fastCarCanDrive)
-					fastCarDrive();
-			case "philly":
-				if (!trainMoving)
-					trainCooldown += 1;
-
-				if (curBeat % 4 == 0)
-				{
-					phillyCityLights.forEach(function(light:BGSprite)
-					{
-						light.visible = false;
-					});
-
-					curLight = FlxG.random.int(0, phillyCityLights.length - 1, [curLight]);
-
-					phillyCityLights.members[curLight].visible = true;
-					phillyCityLights.members[curLight].alpha = 1;
-				}
-
-				if (curBeat % 8 == 4 && FlxG.random.bool(30) && !trainMoving && trainCooldown > 8)
-				{
-					trainCooldown = FlxG.random.int(-4, 0);
-					trainStart();
+						REIMUorb.animation.play("idle");
+					}
 				}
 		}
 
-		if (curStage == 'spooky' && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)
-		{
-			lightningStrikeShit();
-		}
 		lastBeatHit = curBeat;
 
 		setOnLuas('curBeat', curBeat);
