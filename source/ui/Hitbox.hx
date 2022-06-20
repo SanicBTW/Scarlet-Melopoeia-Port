@@ -1,108 +1,73 @@
 package ui;
 
-import flixel.FlxG;
-import flixel.graphics.FlxGraphic;
-import flixel.FlxSprite;
-import flixel.group.FlxSpriteGroup;
-import flixel.ui.FlxButton;
 import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.graphics.FlxGraphic;
+import flixel.group.FlxSpriteGroup;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
+import flixel.ui.FlxButton;
+import flixel.FlxSprite;
 
 class Hitbox extends FlxSpriteGroup
 {
 	public var hitbox:FlxSpriteGroup;
 
-	var sizex:Float = 320;
-
-	var screensizey:Int = 720;
-
 	public var buttonLeft:FlxButton;
 	public var buttonDown:FlxButton;
 	public var buttonUp:FlxButton;
 	public var buttonRight:FlxButton;
+
+	public var orgAlpha:Float = 0.75;
+	public var orgAntialiasing:Bool = true;
 	
-	public function new(?widghtScreen:Float)
+	public function new(?alphaAlt:Float = 0.75, ?antialiasingAlt:Bool = true)
 	{
 		super();
 
-		if (widghtScreen == null)
-			widghtScreen = FlxG.width;
+		orgAlpha = alphaAlt;
+		orgAntialiasing = antialiasingAlt;
 
-		sizex = widghtScreen != null ? widghtScreen / 4 : 320;
+		buttonLeft = new FlxButton(0, 0);
+		buttonDown = new FlxButton(0, 0);
+		buttonUp = new FlxButton(0, 0);
+		buttonRight = new FlxButton(0, 0);
 
-		
-		//add graphic
 		hitbox = new FlxSpriteGroup();
-		hitbox.scrollFactor.set();
+		hitbox.add(add(buttonLeft = createhitbox(0, 0, "left")));
+		hitbox.add(add(buttonDown = createhitbox(320, 0, "down")));
+		hitbox.add(add(buttonUp = createhitbox(640, 0, "up")));
+		hitbox.add(add(buttonRight = createhitbox(960, 0, "right")));
 
-		var hitbox_hint:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('hitbox/hitbox_hint', 'shared'));
-
-		hitbox_hint.alpha = 0.35;
-
-		if (sizex != 320)
-		{
-		hitbox_hint.setGraphicSize(FlxG.width);
-		hitbox_hint.updateHitbox();
-		}
-			
+		var hitbox_hint:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('hitbox/hitbox_hint'));
+		hitbox_hint.antialiasing = orgAntialiasing;
+		hitbox_hint.alpha = orgAlpha;
 		add(hitbox_hint);
-
-
-		hitbox.add(add(buttonLeft = createhitbox(0, "left")));
-
-		hitbox.add(add(buttonDown = createhitbox(sizex, "down")));
-
-		hitbox.add(add(buttonUp = createhitbox(sizex * 2, "up")));
-
-		hitbox.add(add(buttonRight = createhitbox(sizex * 3, "right")));
 	}
 
-	public function createhitbox(X:Float, framestring:String) {
-		var button = new FlxButton(X, 0);
-		var frames = Paths.getSparrowAtlas('hitbox/hitbox', 'shared');
-		
-		var graphic:FlxGraphic = FlxGraphic.fromFrame(frames.getByName(framestring));
-
-		button.loadGraphic(graphic);
-
-		/*button.width = sizex;
-		button.height = FlxG.height;*/
-		button.setGraphicSize(Std.int(sizex), FlxG.height);
-		button.updateHitbox();
-
-		button.alpha = 0;
-
-		var tween:FlxTween;
-
-		button.onDown.callback = function (){
-			if (tween != null)
-				tween.cancel();
-			tween = FlxTween.num(button.alpha, 0.75, .075, {ease: FlxEase.circInOut}, function (a:Float) { button.alpha = a; });
-		};
-
-		button.onUp.callback = function (){
-			if (tween != null)
-				tween.cancel();
-			tween = FlxTween.num(button.alpha, 0, .15, {ease: FlxEase.circInOut}, function (a:Float) { button.alpha = a; });
-		}
-		
-		button.onOut.callback = function (){
-			if (tween != null)
-				tween.cancel();
-			tween = FlxTween.num(button.alpha, 0, .15, {ease: FlxEase.circInOut}, function (a:Float) { button.alpha = a; });
-		}
-
+	public function createhitbox(x:Float = 0, y:Float = 0, frames:String) 
+        {
+		var button = new FlxButton(x, y);
+		button.loadGraphic(FlxGraphic.fromFrame(getFrames().getByName(frames)));
+		button.antialiasing = orgAntialiasing;
+		button.alpha = 0;// sorry but I can't hard lock the hitbox alpha
+		button.onDown.callback = function (){FlxTween.num(0, 0.75, 0.075, {ease:FlxEase.circInOut}, function(alpha:Float){ button.alpha = alpha;});};
+		button.onUp.callback = function (){FlxTween.num(0.75, 0, 0.1, {ease:FlxEase.circInOut}, function(alpha:Float){ button.alpha = alpha;});}
+		button.onOut.callback = function (){FlxTween.num(button.alpha, 0, 0.2, {ease:FlxEase.circInOut}, function(alpha:Float){ button.alpha = alpha;});}
 		return button;
 	}
 
+	public static function getFrames():FlxAtlasFrames
+	{
+		return Paths.getSparrowAtlas('hitbox/hitbox');
+	}
+
 	override public function destroy():Void
-		{
-			super.destroy();
-	
-			buttonLeft = null;
-			buttonDown = null;
-			buttonUp = null;
-			buttonRight = null;
-		}
+	{
+		super.destroy();
+
+		buttonLeft = null;
+		buttonDown = null;
+		buttonUp = null;
+		buttonRight = null;
+	}
 }

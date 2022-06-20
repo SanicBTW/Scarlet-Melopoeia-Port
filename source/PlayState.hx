@@ -854,6 +854,7 @@ class PlayState extends MusicBeatState
 
 		#if mobileC
 			mcontrols = new Mobilecontrols();
+
 			switch (mcontrols.mode)
 			{
 				case VIRTUALPAD_RIGHT | VIRTUALPAD_LEFT | VIRTUALPAD_CUSTOM:
@@ -3904,10 +3905,16 @@ class PlayState extends MusicBeatState
 			{
 				case 693:
 					//i might remove this, i only wanted to have fun lmao
-					dodge(0.5);
+					if(ClientPrefs.constDodging == true){
+						dodge(0.5);
+					}
 				case 696:
 					dad.playAnim("shoot");
 					dad.specialAnim = true;
+					if(ClientPrefs.constDodging == false){
+						boyfriend.playAnim("dodge");
+						boyfriend.specialAnim = true;
+					}
 			}
 		}
 
@@ -4032,6 +4039,11 @@ class PlayState extends MusicBeatState
 					rumia.animation.play("idle2");
 					sakuya.animation.play("idle2");
 				}
+		}
+
+		if(curBeat % 2 == 0 && ClientPrefs.constDodging == true)
+		{
+			dodge(0.85);
 		}
 
 		lastBeatHit = curBeat;
@@ -4575,6 +4587,12 @@ class PlayState extends MusicBeatState
 
 	function onCreatePost()
 	{
+		warning = new FlxSprite(9999, 9999);
+		warning.frames = Paths.getSparrowAtlas("RUMIA-warning");
+		warning.animation.addByPrefix("warning", "warning", 25, true);
+		warning.cameras = [camOther];
+		warning.scale.set(0.50, 0.50);		
+
 		switch(curStage)
 		{
 			case "subway":
@@ -4585,18 +4603,6 @@ class PlayState extends MusicBeatState
 				subway.alpha = 0;
 				tunnelLight.alpha = 0;
 				camGame.shake(0.00075, 115.99);		
-			case "patrol":
-				warning = new FlxSprite(9999, 9999);
-				warning.frames = Paths.getSparrowAtlas("RUMIA-warning");
-				warning.animation.addByPrefix("warning", "warning", 25, true);
-				warning.cameras = [camOther];
-				warning.scale.set(0.50, 0.50);		
-			case "entrance":
-				warning = new FlxSprite(9999, 9999);
-				warning.frames = Paths.getSparrowAtlas("RUMIA-warning");
-				warning.animation.addByPrefix("warning", "warning", 25, true);
-				warning.cameras = [camOther];
-				warning.scale.set(0.50, 0.50);
 		}
 	}
 

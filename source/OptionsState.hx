@@ -36,7 +36,7 @@ using StringTools;
 // TO DO: Redo the menu creation system for not being as dumb
 class OptionsState extends MusicBeatState
 {
-	var options:Array<String> = ['Controls', #if android 'Mobile Controls', #end 'Notes', 'Preferences'];
+	var options:Array<String> = ['Controls', #if mobileC 'Mobile Controls', #end 'Notes', 'Preferences'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
@@ -70,6 +70,10 @@ class OptionsState extends MusicBeatState
 			grpOptions.add(optionText);
 		}
 		changeSelection();
+
+		#if mobileC
+			addVirtualPad(FULL, A_B);
+		#end
 
 		super.create();
 	}
@@ -197,6 +201,10 @@ class NotesSubstate extends MusicBeatSubstate
 		hsvText = new Alphabet(0, 0, "Hue    Saturation  Brightness", false, false, 0, 0.65);
 		add(hsvText);
 		changeSelection();
+
+		#if mobileC
+			addVirtualPad(FULL, A_B);
+		#end
 	}
 
 	var changingNote:Bool = false;
@@ -414,6 +422,7 @@ class PreferencesSubstate extends MusicBeatSubstate
 		'GRAPHICS', //order is here lol
 		'VISUALS AND UI',
         'GAMEPLAY',
+		'FEATURES'
     ];
     static var noCheckbox:Array<String> = [
 		'Framerate',
@@ -454,7 +463,10 @@ class PreferencesSubstate extends MusicBeatSubstate
 		'Middlescroll',
 		'Ghost Tapping',
 		'No Antimash',
-		'Note Delay'
+		'Note Delay',
+		'FEATURES',
+		'Constant Dodging',
+		'Vine Boom SFX'
     ];
 
 	private var grpOptions:FlxTypedGroup<Alphabet>;
@@ -533,6 +545,10 @@ class PreferencesSubstate extends MusicBeatSubstate
 		}
 		changeSelection();
 		reloadValues();
+
+		#if mobileC
+		addVirtualPad(FULL, A_B);
+		#end
 	}
 
 	var nextAccept:Int = 5;
@@ -620,6 +636,10 @@ class PreferencesSubstate extends MusicBeatSubstate
 						ClientPrefs.ghostTapping = !ClientPrefs.ghostTapping;
 					case 'No Antimash':
 						ClientPrefs.noAntimash = !ClientPrefs.noAntimash;
+					case 'Constant Dodging':
+						ClientPrefs.constDodging = !ClientPrefs.constDodging;
+					case 'Vine Boom SFX':
+						ClientPrefs.vineBoomDodge = !ClientPrefs.vineBoomDodge;
 				}
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				reloadValues();
@@ -758,6 +778,11 @@ class PreferencesSubstate extends MusicBeatSubstate
 				daText = "If checked, disables antimash.";
 			case 'Note Delay':
 				daText = "Changes how late a note is spawned.\nUseful for preventing audio lag from wireless earphones.";
+
+			case 'Constant Dodging':
+				daText = "If enabled, you will have to constantly dodge, easy";
+			case 'Vine Boom SFX':
+				daText = "When dodging a vine boom sfx will play";
 		}
 		descText.text = daText;
 
@@ -849,6 +874,11 @@ class PreferencesSubstate extends MusicBeatSubstate
 						daValue = ClientPrefs.ghostTapping;
 					case 'No Antimash':
 						daValue = ClientPrefs.noAntimash;
+
+					case 'Constant Dodging':
+						daValue = ClientPrefs.constDodging;
+					case 'Vine Boom SFX':
+						daValue = ClientPrefs.vineBoomDodge;
 				}
 				checkbox.daValue = daValue;
 			}

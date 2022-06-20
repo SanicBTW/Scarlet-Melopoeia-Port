@@ -41,6 +41,8 @@ class ClientPrefs {
 	public static var judgements:Bool = false; 
 	public static var scoreType:String = 'Kade Engine';
 	public static var noAntimash:Bool = false; 
+	public static var constDodging:Bool = false;
+	public static var vineBoomDodge:Bool = false;
 
 	public static function saveSettings() {
 		FlxG.save.data.downScroll = downScroll;
@@ -74,6 +76,10 @@ class ClientPrefs {
 		FlxG.save.data.memoryCounter = memoryCounter;
 		FlxG.save.data.judgements = judgements;
 		FlxG.save.data.scoreType = scoreType;
+
+		//from port
+		FlxG.save.data.constDodging = constDodging;
+		FlxG.save.data.vineBoomDodge = vineBoomDodge;
 
 		FlxG.save.flush();
 
@@ -180,6 +186,14 @@ class ClientPrefs {
         }
 		if(FlxG.save.data.scoreType != null) {
 			scoreType = FlxG.save.data.scoreType;
+		}
+
+		//from port
+		if(FlxG.save.data.constDodging != null) {
+			constDodging = FlxG.save.data.constDodging;
+		}
+		if(FlxG.save.data.vineBoomDodge != null) {
+			vineBoomDodge = FlxG.save.data.vineBoomDodge;
 		}
 		// flixel automatically saves your volume!
 		if(FlxG.save.data.volume != null) {
