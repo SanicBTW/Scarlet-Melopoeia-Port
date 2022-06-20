@@ -292,6 +292,10 @@ class PlayState extends MusicBeatState
 	var sign:FlxSprite;
 	var laser:FlxSprite;
 
+	var daiyousei:FlxSprite;
+	var rumia:FlxSprite;
+	var sakuya:FlxSprite;
+
 	override public function create()
 	{
         #if MODS_ALLOWED
@@ -509,6 +513,33 @@ class PlayState extends MusicBeatState
 
 				add(sign);
 				add(laser);
+
+			case "patrol":
+				GameOverSubstate.characterName = "PatrolCIRNO";
+				GameOverSubstate.deathSoundName = "fnf_loss_cirno";
+
+				var funky_bg = new BGSprite('funky-bg', -400, -250);
+				funky_bg.scrollFactor.set(1,1);
+
+				daiyousei = new FlxSprite(950, 350);
+				daiyousei.frames = Paths.getSparrowAtlas("patrol/PatrolDAI");
+				daiyousei.animation.addByIndices('dance0', 'DAIYOUSEI_idle', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14], "", 24);
+				daiyousei.animation.addByIndices('dance1', 'DAIYOUSEI_idle', [15,16,17,18,19,20,21,22,23,24,25,26,27,28,29], "", 24);
+				daiyousei.scrollFactor.set(1,1);
+				rumia = new FlxSprite(850, 480);
+				rumia.frames = Paths.getSparrowAtlas("patrol/PatrolRUMIA");
+				rumia.animation.addByPrefix("idle1", 'PatrolRUMIA', 24, false);
+				rumia.animation.addByPrefix("idle2", "PatrolRUMIA", 24, false);
+				rumia.scrollFactor.set(0.7, 0.2);
+				rumia.scale.set(1.2, 1.2);
+				sakuya = new FlxSprite(-350, 420);
+				sakuya.frames = Paths.getSparrowAtlas("patrol/PatrolSAKUYA");
+				sakuya.animation.addByPrefix("idle1", "PatrolSAKUYA", 24, false);
+				sakuya.animation.addByPrefix("idle2", "PatrolSAKUYA", 24, false);
+				sakuya.scrollFactor.set(0.7, 0.2);
+				sakuya.scale.set(1.2, 1.2);
+
+				add(funky_bg);
 		}
 
 		if(isPixelStage) {
@@ -517,12 +548,16 @@ class PlayState extends MusicBeatState
 
 		add(gfGroup);
 
-		// Shitty layering but whatev it works LOL
-		if (curStage == 'limo')
-			add(limo);
-
 		add(dadGroup);
 		add(boyfriendGroup);
+
+		//me when layering
+		if(curStage == "patrol"){
+			add(daiyousei);
+			add(rumia);
+			add(sakuya);
+		}
+			
 
 		#if LUA_ALLOWED
 		luaDebugGroup = new FlxTypedGroup<DebugLuaText>();
@@ -535,7 +570,7 @@ class PlayState extends MusicBeatState
 		if(gfVersion == null || gfVersion.length < 1) {
 			switch (curStage)
 			{
-				case "entrance":
+				case "entrance" | "patrol":
 					gfVersion = "noRGF";
 				case "subway":
 					gfVersion = "couple";
@@ -1809,13 +1844,13 @@ class PlayState extends MusicBeatState
 		super.update(elapsed);
 
 		if(ratingString == '?') {
-			scoreTxt.text = 'Score: ' + songScore + ' //  Misses: ' + songMisses + ' // Rank: ' + ratingString;
+			scoreTxt.text = 'Score: ' + songScore + ' |  Misses: ' + songMisses + ' | Rank: ' + ratingString;
 			judgementCounter.text = 'Sicks: 0 \nGoods: 0\nBads: 0\nShits: 0\ne';
-                        healthCounter.text = 'Health: 50%';
+            healthCounter.text = 'Health: 50%';
 		} else {
-			scoreTxt.text = 'Score: ' + songScore + ' // Misses: ' + songMisses + ' // Acc: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%' + ' // Rank: ' + ratingString + ' (' + ratingFC + ')' ;//peeps wanted no integer rating
-                        judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nE';
-                        healthCounter.text = 'Health: ' + Math.round(health * 50) + '%'  ;
+			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Acc: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%' + ' | Rank: ' + ratingString + ' (' + ratingFC + ')' ;//peeps wanted no integer rating
+            judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nE';
+            healthCounter.text = 'Health: ' + Math.round(health * 50) + '%'  ;
 		}
 
 		if(cpuControlled) {
@@ -3863,6 +3898,19 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		if(curStage == "patrol")
+		{
+			switch(curStep)
+			{
+				case 693:
+					//i might remove this, i only wanted to have fun lmao
+					dodge(0.5);
+				case 696:
+					dad.playAnim("shoot");
+					dad.specialAnim = true;
+			}
+		}
+
 		lastStepHit = curStep;
 		setOnLuas('curStep', curStep);
 		callOnLuas('onStepHit', []);
@@ -3970,6 +4018,19 @@ class PlayState extends MusicBeatState
 				if(curBeat % 2 == 0)
 				{
 					sign.animation.play("demarcation");
+				}
+			case "patrol":
+				if(curBeat % 2 == 0)
+				{
+					daiyousei.animation.play("dance0");
+					rumia.animation.play("idle1");
+					sakuya.animation.play("idle1");
+				}
+				if(curBeat % 2 == 1)
+				{
+					daiyousei.animation.play("dance1");
+					rumia.animation.play("idle2");
+					sakuya.animation.play("idle2");
 				}
 		}
 
@@ -4524,6 +4585,12 @@ class PlayState extends MusicBeatState
 				subway.alpha = 0;
 				tunnelLight.alpha = 0;
 				camGame.shake(0.00075, 115.99);		
+			case "patrol":
+				warning = new FlxSprite(9999, 9999);
+				warning.frames = Paths.getSparrowAtlas("RUMIA-warning");
+				warning.animation.addByPrefix("warning", "warning", 25, true);
+				warning.cameras = [camOther];
+				warning.scale.set(0.50, 0.50);		
 			case "entrance":
 				warning = new FlxSprite(9999, 9999);
 				warning.frames = Paths.getSparrowAtlas("RUMIA-warning");
