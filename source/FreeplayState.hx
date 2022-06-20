@@ -302,7 +302,14 @@ class FreeplayState extends MusicBeatState
 			if(colorTween != null) {
 				colorTween.cancel();
 			}
-			LoadingState.loadAndSwitchState(new PlayState());
+			if(FlxG.keys.pressed.SHIFT)
+			{
+				LoadingState.loadAndSwitchState(new editors.ChartingState());
+			}
+			else
+			{
+				LoadingState.loadAndSwitchState(new PlayState());
+			}
 
 			FlxG.sound.music.volume = 0;
 					

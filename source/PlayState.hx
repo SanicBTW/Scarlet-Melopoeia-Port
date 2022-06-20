@@ -282,6 +282,10 @@ class PlayState extends MusicBeatState
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
 
 	var precacheList:Map<String, String> = new Map<String, String>();
+
+	var subway:BGSprite;
+	var tunnelLight:FlxSprite;
+
 	var REIMUorb:FlxSprite;
 
 	override public function create()
@@ -349,6 +353,8 @@ class PlayState extends MusicBeatState
 		if(PlayState.SONG.stage == null || PlayState.SONG.stage.length < 1) {
 			switch (songName)
 			{
+				case "lowest-vibes":
+					curStage = "subway";
 				case "mystical-maiden" | "eternal-pray":
 					curStage = "shrine";
 			}
@@ -404,6 +410,22 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
+			case "subway":
+				GameOverSubstate.characterName = "coupleGM";
+				GameOverSubstate.deathSoundName = "fnf_loss_subway";
+				GameOverSubstate.loopSoundName = "subwayLoop";
+				GameOverSubstate.endSoundName = "subwayEnd";
+
+				tunnelLight = new FlxSprite(-1250, -200);
+				tunnelLight.frames = Paths.getSparrowAtlas('prologue/tunnelLight');
+				tunnelLight.animation.addByPrefix("movement", "tunnel", 24, true);
+				tunnelLight.scrollFactor.set(1,1);
+
+				subway = new BGSprite('prologue/prologue_subway', -1250, -750);
+				subway.scrollFactor.set(1,1);
+
+				add(tunnelLight);
+				add(subway);
 			case "shrine":
 				GameOverSubstate.characterName = "RBF";
 
@@ -467,6 +489,8 @@ class PlayState extends MusicBeatState
 		if(gfVersion == null || gfVersion.length < 1) {
 			switch (curStage)
 			{
+				case "subway":
+					gfVersion = "couple";
 				case "shrine":
 					gfVersion = "RGFbasic";
 			}
@@ -899,6 +923,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 		CustomFadeTransition.nextCamera = camOther;
+		onCreatePost();
 	}
 
 	public function addTextToDebug(text:String) {
@@ -3828,6 +3853,39 @@ class PlayState extends MusicBeatState
 			return;
 		}
 
+		if(curStage == "subway")
+		{
+			switch(curStep)
+			{
+				case 0:
+					gfSpeed = 4;
+				case 15:
+					/* haxe ver must be above 4.1.5 lol, though i dont understand this one
+					for(i in 0...3)
+					{
+						strumLineNotes[i].alpha = 0;
+					}
+					for(i in 4...7)
+					{
+						strumLineNotes[i].x = i*200-515;
+					}
+					*/
+					FlxTween.tween(camHUD, {alpha: 1}, 1.5, {ease: FlxEase.linear});
+				case 30:
+					FlxTween.tween(gf, {alpha: 1}, 3, {ease: FlxEase.linear});
+				case 90:
+					gfSpeed = 2;
+				case 120:
+					FlxTween.tween(subway, {alpha: 1}, 3, {ease: FlxEase.linear});
+				case 135:
+					gfSpeed = 1;
+				case 142:
+					FlxTween.tween(tunnelLight, {alpha: 1}, 3, {ease: FlxEase.linear});
+				case 150:
+					gfSpeed = 4;
+			}
+		}
+
 		lastStepHit = curStep;
 		setOnLuas('curStep', curStep);
 		callOnLuas('onStepHit', []);
@@ -4471,4 +4529,15 @@ class PlayState extends MusicBeatState
 			//bedrock engine my beloved
 		} //not working in 0.4.2 sadly
 	} */
+
+	function onCreatePost()
+	{
+		camHUD.alpha = 0;
+		iconP1.alpha = 0;
+		iconP2.alpha = 0;
+		gf.alpha = 0;
+		subway.alpha = 0;
+		tunnelLight.alpha = 0;
+		camGame.shake(0.00075, 115.99);
+	}
 }
