@@ -28,6 +28,7 @@ class KeyBinds
         FlxG.save.data.backBind = "BACKSPACE";
         FlxG.save.data.pauseBind = "ENTER";
         FlxG.save.data.resetBind = "R";
+        FlxG.save.data.dodgeBind = "SPACE";
         //alts, though are they necessary?, guess gotta code them
         FlxG.save.data.noteUpALTBind = "UP";
         FlxG.save.data.noteDownALTBind = "DOWN";
@@ -43,6 +44,7 @@ class KeyBinds
         FlxG.save.data.altbackBind = "ESCAPE";
         FlxG.save.data.altpauseBind = "ESCAPE";
         FlxG.save.data.altresetBind = "NONE";
+        FlxG.save.data.altdodgeBind = "NONE";
 
         PlayerSettings.player1.controls.loadKeyBinds();
 	}
@@ -104,6 +106,11 @@ class KeyBinds
             FlxG.save.data.resetBind = "R";
         }
 
+        if(FlxG.save.data.dodgeBind == null)
+        {
+            FlxG.save.data.dodgeBind = "SPACE";
+        }
+
 
         //alts
         //notes
@@ -158,6 +165,11 @@ class KeyBinds
         if(FlxG.save.data.altresetBind == null)
         {
             FlxG.save.data.altresetBind = "NONE";
+        }
+
+        if(FlxG.save.data.altdodgeBind == null)
+        {
+            FlxG.save.data.altdodgeBind = "NONE";
         }
     }
 }

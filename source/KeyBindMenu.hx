@@ -34,12 +34,14 @@ class KeyBindMenu extends MusicBeatSubstate
     var keyText:Array<Dynamic> = 
     [
         "NOTE LEFT", "NOTE DOWN", "NOTE UP", "NOTE RIGHT",
-        "ACCEPT", "BACK", "PAUSE", "RESET"
+        "ACCEPT", "BACK", "PAUSE", "RESET",
+        "DODGE"
     ];
     var defaultKeys:Array<Dynamic> = 
     [
         "A", "S", "W", "D",
-        "SPACE", "BACKSPACE", "ENTER", "R"
+        "SPACE", "BACKSPACE", "ENTER", "R",
+        "SPACE"
     ];
     var curSelected:Int = -1;
 
@@ -51,7 +53,8 @@ class KeyBindMenu extends MusicBeatSubstate
         FlxG.save.data.acceptBind, //4
         FlxG.save.data.backBind, //5
         FlxG.save.data.pauseBind, //6
-        FlxG.save.data.resetBind //7
+        FlxG.save.data.resetBind, //7
+        FlxG.save.data.dodgeBind //8
     ];
 
     var tempKey:String = "";
@@ -177,10 +180,10 @@ class KeyBindMenu extends MusicBeatSubstate
 
         keyTextDisplay.text = "\n\n";
 
-        for(i in 0...8){
+        for(i in 0...9){
 
             var textStart = (i == curSelected) ? "> " : "  ";
-            keyTextDisplay.text += textStart + keys[i] + " (" +  keyText[i] + ")\n";
+            keyTextDisplay.text += textStart + keyText[i] + ": " + keys[i] + "\n";
         }
         keyTextDisplay.screenCenter();
     }
@@ -194,6 +197,7 @@ class KeyBindMenu extends MusicBeatSubstate
         FlxG.save.data.backBind = keys[5];
         FlxG.save.data.pauseBind = keys[6];
         FlxG.save.data.resetBind = keys[7];
+        FlxG.save.data.dodgeBind = keys[8];
 
         FlxG.save.flush();
 
@@ -202,7 +206,7 @@ class KeyBindMenu extends MusicBeatSubstate
 
     function reset()
     {
-        for(i in 0...7){
+        for(i in 0...8){
             keys[i] = defaultKeys[i];
         }
 
@@ -260,9 +264,9 @@ class KeyBindMenu extends MusicBeatSubstate
     {
         curSelected += _amount;
                 
-        if (curSelected > 11)
+        if (curSelected > 12)
             curSelected = 0;
         if (curSelected < 0)
-            curSelected = 11;
+            curSelected = 12;
     }
 }

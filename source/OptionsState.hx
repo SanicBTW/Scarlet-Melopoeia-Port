@@ -51,7 +51,7 @@ class OptionsState extends MusicBeatState
 		DiscordClient.changePresence("Options Menu", null);
 		#end
 
-		var menuBG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		var menuBG = new FlxSprite().loadGraphic(Paths.image('menuBG'));
 		menuBG.color = 0xFFea71fd;
 		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
 		menuBG.updateHitbox();
@@ -466,7 +466,7 @@ class PreferencesSubstate extends MusicBeatSubstate
 		'Note Delay',
 		'FEATURES',
 		'Constant Dodging',
-		'Vine Boom SFX'
+		'Vine Boom Death Effect'
     ];
 
 	private var grpOptions:FlxTypedGroup<Alphabet>;
