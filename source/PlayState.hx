@@ -2563,9 +2563,11 @@ class PlayState extends MusicBeatState
 		add(warning);
 		FlxG.sound.play(Paths.sound("warning"));
 		candodge = true;
+		//having issues with this lol
 		died.start(dodgetime, timer -> ({
 			if(dodged == false){
 				health = 0;
+				doDeathCheck();
 			} else if(dodged == true){
 				dodged = false;
 			}
