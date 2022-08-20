@@ -74,7 +74,8 @@
 	<haxelib name="faxe" if='switch'/>
 	<!--<haxelib name="polymod"/> -->
 	<haxelib name="discord_rpc" if="desktop"/>
-	<haxelib name="android6permissions" if="android"/>
+
+
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
