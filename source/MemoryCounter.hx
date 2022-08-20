@@ -1,42 +1,41 @@
 package;
 
+import haxe.Timer;
 import openfl.events.Event;
 import openfl.system.System;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
 
-/**
- * FPS class extension to display memory usage.
- * @author Kirill Poletaev
- */
-
 class MemoryCounter extends TextField
 {
-	private var times:Array<Float>;
-	private var memPeak:Float = 0;
+    var memPeak:Float = 0;
 
-	public function new(inX:Float = 10.0, inY:Float = 50.0, inCol:Int = 0xffffff) 
-	{
-		super();
+    public function new(xPos:Float, yPos:Float)
+    {
+        super();
 
-		x = inX;
-		y = inY;
-		selectable = false;
-		defaultTextFormat = new TextFormat("_sans", 12, inCol);
+        x = xPos;
+        y = yPos;
+        width = 200;
+        height = 70;
 
-		addEventListener(Event.ENTER_FRAME, onEnter);
-		width = 150;
-		height = 70;
-	}
+        selectable = false;
 
-	private function onEnter(_)
-	{	
-		var mem:Float = Math.round(System.totalMemory / 1024 / 1024 * 100)/100;
-		if (mem > memPeak) memPeak = mem;
+        defaultTextFormat = new TextFormat("_sans", 12, 0xFFFFFF);
+        text = "";
 
-		if (ClientPrefs.showFPS)
-		{	
-			text = "\nRAM: " + mem + " MB\nRAM max: " + memPeak + " MB";	
-		}
-	}
-} 
+        addEventListener(Event.ENTER_FRAME, onEnterFrame);
+    }
+
+    function onEnterFrame(_) 
+    {
+        var mem:Float = Math.round(System.totalMemory / 1024 / 1024 * 100) / 100;
+        if(mem > memPeak)
+            memPeak = mem;
+
+        if(visible)
+        {
+            text = "Memory: " + mem + " MB\nPeak Memory: " + memPeak + " MB";
+        }
+    }
+}

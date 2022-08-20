@@ -7,7 +7,8 @@ import flixel.graphics.FlxGraphic;
 import Controls;
 
 class ClientPrefs {
-	public static var downScroll:Bool = false; 
+	//TO DO: Redo ClientPrefs in a way that isn't too stupid
+	public static var downScroll:Bool = false;
 	public static var middleScroll:Bool = false;
 	public static var showFPS:Bool = true;
 	public static var flashing:Bool = true;
@@ -19,30 +20,55 @@ class ClientPrefs {
 	public static var violence:Bool = true;
 	public static var camZooms:Bool = true;
 	public static var hideHud:Bool = false;
-	public static var iconBoping:Bool = false;
 	public static var noteOffset:Int = 0;
-	public static var speed:Float = 2;
-	public static var noteSize:Float = 0.7;
-	public static var scroll:Bool = false;
-	public static var arrowHSV:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]; 
+	public static var arrowHSV:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
 	public static var imagesPersist:Bool = false;
 	public static var ghostTapping:Bool = true;
-	public static var timeBarType:String = 'Time Left';
-	public static var keTimeBar:Bool = false;
-	public static var arrowOpacity:Float = 1;
-	public static var laneOpacity:Float = 1;
-	public static var healthBarAlpha:Float = 1; 
-	public static var playHitSounds:Bool = false; 
-	public static var dynamicCam:Bool = false;
-	public static var opponentLaneOpacity:Float = 1;
-	public static var healthCounter:Bool = false; 
-	public static var opponentArrowOpacity:Float = 1; 
-	public static var memoryCounter:Bool = false; 
-	public static var judgements:Bool = false; 
-	public static var scoreType:String = 'Kade Engine';
-	public static var noAntimash:Bool = false; 
-	public static var constDodging:Bool = false;
-	public static var vineBoomDodge:Bool = false;
+	public static var hideTime:Bool = false;
+
+	public static var showMemory:Bool = true;
+	public static var optDisableScoreTween:Bool = false;
+	public static var optHideHealthBar:Bool = false;
+	public static var cameraMovOnNoteP:Bool = true;
+	public static var chartScanPriority:String = "normal";
+	public static var iconBoping:Bool = true;
+	public static var pauseMusic:String = "Tea Time";
+
+	public static var defaultKeys:Array<FlxKey> = [
+		A, LEFT,			//Note Left
+		S, DOWN,			//Note Down
+		W, UP,				//Note Up
+		D, RIGHT,			//Note Right
+
+		A, LEFT,			//UI Left
+		S, DOWN,			//UI Down
+		W, UP,				//UI Up
+		D, RIGHT,			//UI Right
+
+		R, NONE,			//Reset
+		SPACE, ENTER,		//Accept
+		BACKSPACE, ESCAPE,	//Back
+		ENTER, ESCAPE		//Pause
+	];
+	//Every key has two binds, these binds are defined on defaultKeys! If you want your control to be changeable, you have to add it on ControlsSubState (inside OptionsState)'s list
+	public static var keyBinds:Array<Dynamic> = [
+		//Key Bind, Name for ControlsSubState
+		[Control.NOTE_LEFT, 'Left'],
+		[Control.NOTE_DOWN, 'Down'],
+		[Control.NOTE_UP, 'Up'],
+		[Control.NOTE_RIGHT, 'Right'],
+
+		[Control.UI_LEFT, 'Left '],		//Added a space for not conflicting on ControlsSubState
+		[Control.UI_DOWN, 'Down '],		//Added a space for not conflicting on ControlsSubState
+		[Control.UI_UP, 'Up '],			//Added a space for not conflicting on ControlsSubState
+		[Control.UI_RIGHT, 'Right '],	//Added a space for not conflicting on ControlsSubState
+
+		[Control.RESET, 'Reset'],
+		[Control.ACCEPT, 'Accept'],
+		[Control.BACK, 'Back'],
+		[Control.PAUSE, 'Pause']
+	];
+	public static var lastControls:Array<FlxKey> = defaultKeys.copy();
 
 	public static function saveSettings() {
 		FlxG.save.data.downScroll = downScroll;
@@ -53,46 +79,34 @@ class ClientPrefs {
 		FlxG.save.data.noteSplashes = noteSplashes;
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.framerate = framerate;
+		FlxG.save.data.cursing = cursing;
+		FlxG.save.data.violence = violence;
 		FlxG.save.data.camZooms = camZooms;
 		FlxG.save.data.noteOffset = noteOffset;
 		FlxG.save.data.hideHud = hideHud;
 		FlxG.save.data.arrowHSV = arrowHSV;
 		FlxG.save.data.imagesPersist = imagesPersist;
 		FlxG.save.data.ghostTapping = ghostTapping;
-		FlxG.save.data.achievementsMap = Achievements.achievementsMap;
-		FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
-		FlxG.save.data.timeBarType = timeBarType;
-
-		//from engine
-		FlxG.save.data.keTimeBar = keTimeBar;
-		FlxG.save.data.playHitSounds = playHitSounds;
-		FlxG.save.data.scoreType = scoreType;
-		FlxG.save.data.healthCounter = healthCounter;
-		FlxG.save.data.arrowOpacity = arrowOpacity;
-		FlxG.save.data.opponentArrowOpacity = opponentArrowOpacity;
+		FlxG.save.data.hideTime = hideTime;
+		
+		FlxG.save.data.showMemory = showMemory;
+		FlxG.save.data.optDisableScoreTween = optDisableScoreTween;
+		FlxG.save.data.optHideHealthBar = optHideHealthBar;
+		FlxG.save.data.cameraMovOnNoteP = cameraMovOnNoteP;
+		FlxG.save.data.chartScanPriority = chartScanPriority;
 		FlxG.save.data.iconBoping = iconBoping;
-		FlxG.save.data.noAntimash = noAntimash;
-		FlxG.save.data.healthBarAlpha = healthBarAlpha;
-		FlxG.save.data.memoryCounter = memoryCounter;
-		FlxG.save.data.judgements = judgements;
-		FlxG.save.data.scoreType = scoreType;
-
-		//from port
-		FlxG.save.data.constDodging = constDodging;
-		FlxG.save.data.vineBoomDodge = vineBoomDodge;
+		FlxG.save.data.pauseMusic = pauseMusic;
 
 		FlxG.save.flush();
 
 		var save:FlxSave = new FlxSave();
-		save.bind('controls_v00', 'ninjamuffin99'); //Placing this in a separate save so that it can be manually deleted without removing your Score and stuff
+		save.bind('controls', 'ninjamuffin99'); //Placing this in a separate save so that it can be manually deleted without removing your Score and stuff
+		save.data.customControls = lastControls;
 		save.flush();
 		FlxG.log.add("Settings saved!");
 	}
 
 	public static function loadPrefs() {
-		PlayerSettings.player1.controls.loadKeyBinds();
-		KeyBinds.keyCheck();
-
 		if(FlxG.save.data.downScroll != null) {
 			downScroll = FlxG.save.data.downScroll;
 		}
@@ -127,15 +141,14 @@ class ClientPrefs {
 				FlxG.updateFramerate = framerate;
 			}
 		}
+		/*if(FlxG.save.data.cursing != null) {
+			cursing = FlxG.save.data.cursing;
+		}
+		if(FlxG.save.data.violence != null) {
+			violence = FlxG.save.data.violence;
+		}*/
 		if(FlxG.save.data.camZooms != null) {
 			camZooms = FlxG.save.data.camZooms;
-		}
-		if(FlxG.save.data.imagesPersist != null) {
-			imagesPersist = FlxG.save.data.imagesPersist;
-			FlxGraphic.defaultPersist = ClientPrefs.imagesPersist;
-		}
-		if(FlxG.save.data.ghostTapping != null) {
-			ghostTapping = FlxG.save.data.ghostTapping;
 		}
 		if(FlxG.save.data.hideHud != null) {
 			hideHud = FlxG.save.data.hideHud;
@@ -146,61 +159,79 @@ class ClientPrefs {
 		if(FlxG.save.data.arrowHSV != null) {
 			arrowHSV = FlxG.save.data.arrowHSV;
 		}
-		if(FlxG.save.data.timeBarType != null) {
-            timeBarType = FlxG.save.data.timeBarType;
-        }
+		if(FlxG.save.data.imagesPersist != null) {
+			imagesPersist = FlxG.save.data.imagesPersist;
+			FlxGraphic.defaultPersist = ClientPrefs.imagesPersist;
+		}
+		if(FlxG.save.data.ghostTapping != null) {
+			ghostTapping = FlxG.save.data.ghostTapping;
+		}
+		if(FlxG.save.data.hideTime != null) {
+			hideTime = FlxG.save.data.hideTime;
+		}
 
-		//from engine
-		if(FlxG.save.data.keTimeBar != null) {
-            keTimeBar = FlxG.save.data.keTimeBar;
-        }
-		if(FlxG.save.data.playHitSounds != null) {
-            playHitSounds = FlxG.save.data.playHitSounds;
-        }
-		if(FlxG.save.data.scoreType != null) {
-            scoreType = FlxG.save.data.scoreType;
-        }
-		if(FlxG.save.data.healthCounter != null) {
-            healthCounter = FlxG.save.data.healthCounter;
-        }
-		if(FlxG.save.data.arrowOpacity != null) {
-            arrowOpacity = FlxG.save.data.arrowOpacity;
-        }
-		if(FlxG.save.data.opponentArrowOpacity != null) {
-            opponentArrowOpacity = FlxG.save.data.opponentArrowOpacity;
-        }
+		if(FlxG.save.data.showMemory != null) {
+			showMemory = FlxG.save.data.showMemory;
+		}
+
+		if(FlxG.save.data.optDisableScoreTween != null) {
+			optDisableScoreTween = FlxG.save.data.optDisableScoreTween;
+		}
+		if(FlxG.save.data.optHideHealthBar != null) {
+			optHideHealthBar = FlxG.save.data.optHideHealthBar;
+		}
+		if(FlxG.save.data.cameraMovOnNoteP != null) {
+			cameraMovOnNoteP = FlxG.save.data.cameraMovOnNoteP;
+		}
+		if(FlxG.save.data.chartScanPriority != null) {
+			chartScanPriority = FlxG.save.data.chartScanPriority;
+		}
 		if(FlxG.save.data.iconBoping != null) {
-            iconBoping = FlxG.save.data.iconBoping;
-        }
-		if(FlxG.save.data.noAntimash != null) {
-            noAntimash = FlxG.save.data.noAntimash;
-        }
-		if(FlxG.save.data.healthBarAlpha != null) {
-            healthBarAlpha = FlxG.save.data.healthBarAlpha;
-        }
-		if(FlxG.save.data.memoryCounter != null) {
-            memoryCounter = FlxG.save.data.memoryCounter;
-        }
-		if(FlxG.save.data.judgements != null) {
-            judgements = FlxG.save.data.judgements;
-        }
-		if(FlxG.save.data.scoreType != null) {
-			scoreType = FlxG.save.data.scoreType;
+			iconBoping = FlxG.save.data.iconBoping;
 		}
-
-		//from port
-		if(FlxG.save.data.constDodging != null) {
-			constDodging = FlxG.save.data.constDodging;
-		}
-		if(FlxG.save.data.vineBoomDodge != null) {
-			vineBoomDodge = FlxG.save.data.vineBoomDodge;
-		}
-		// flixel automatically saves your volume!
-		if(FlxG.save.data.volume != null) {
-			FlxG.sound.volume = FlxG.save.data.volume;
+		if(FlxG.save.data.pauseMusic != null) {
+			pauseMusic = FlxG.save.data.pauseMusic;
 		}
 
 		var save:FlxSave = new FlxSave();
-		save.bind('controls_v00', 'ninjamuffin99');
+		save.bind('controls', 'ninjamuffin99');
+		if(save != null && save.data.customControls != null) {
+			reloadControls(save.data.customControls);
+		}
+	}
+
+	public static function reloadControls(newKeys:Array<FlxKey>) {
+		ClientPrefs.removeControls(ClientPrefs.lastControls);
+		ClientPrefs.lastControls = newKeys.copy();
+		ClientPrefs.loadControls(ClientPrefs.lastControls);
+	}
+
+	private static function removeControls(controlArray:Array<FlxKey>) {
+		for (i in 0...keyBinds.length) {
+			var controlValue:Int = i*2;
+			var controlsToRemove:Array<FlxKey> = [];
+			for (j in 0...2) {
+				if(controlArray[controlValue+j] != NONE) {
+					controlsToRemove.push(controlArray[controlValue+j]);
+				}
+			}
+			if(controlsToRemove.length > 0) {
+				PlayerSettings.player1.controls.unbindKeys(keyBinds[i][0], controlsToRemove);
+			}
+		}
+	}
+	private static function loadControls(controlArray:Array<FlxKey>) {
+		for (i in 0...keyBinds.length) {
+			var controlValue:Int = i*2;
+			var controlsToAdd:Array<FlxKey> = [];
+			for (j in 0...2) {
+				if(controlArray[controlValue+j] != NONE) {
+					controlsToAdd.push(controlArray[controlValue+j]);
+				}
+			}
+			if(controlsToAdd.length > 0) {
+				PlayerSettings.player1.controls.bindKeys(keyBinds[i][0], controlsToAdd);
+			}
+		}
 	}
 }

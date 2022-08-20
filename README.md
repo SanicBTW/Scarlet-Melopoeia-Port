@@ -1,1 +1,1 @@
-based off [my funny pe 0.4.2 android port](https://github.com/SanicBTW/PE-0.4.2-Android)
+Based off [PE 0.3.2h](https://github.com/SanicBTW/FNF-PE-0.3.2h)

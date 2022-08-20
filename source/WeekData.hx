@@ -1,5 +1,9 @@
 package;
 
+#if MODS_ALLOWED
+import sys.io.File;
+import sys.FileSystem;
+#end
 import lime.utils.Assets;
 import openfl.utils.Assets as OpenFlAssets;
 import haxe.Json;
@@ -20,6 +24,7 @@ typedef WeekFile =
 	var startUnlocked:Bool;
 	var hideStoryMode:Bool;
 	var hideFreeplay:Bool;
+	var difficulties:String;
 }
 
 class WeekData {
@@ -38,6 +43,7 @@ class WeekData {
 	public var startUnlocked:Bool;
 	public var hideStoryMode:Bool;
 	public var hideFreeplay:Bool;
+	public var difficulties:String;
 
 	public static function createWeekFile():WeekFile {
 		var weekFile:WeekFile = {
@@ -50,7 +56,8 @@ class WeekData {
 			freeplayColor: [146, 113, 253],
 			startUnlocked: true,
 			hideStoryMode: false,
-			hideFreeplay: false
+			hideFreeplay: false,
+			difficulties: ''
 		};
 		return weekFile;
 	}
@@ -67,6 +74,7 @@ class WeekData {
 		startUnlocked = weekFile.startUnlocked;
 		hideStoryMode = weekFile.hideStoryMode;
 		hideFreeplay = weekFile.hideFreeplay;
+		difficulties = weekFile.difficulties;
 	}
 
 	public static function reloadWeekFiles(isStoryMode:Null<Bool> = false)
@@ -85,6 +93,12 @@ class WeekData {
 					if(week != null) {
 						var weekFile:WeekData = new WeekData(week);
 
+						#if MODS_ALLOWED
+						if(j >= originalLength) {
+							weekFile.folder = directories[j].substring(Paths.mods().length, directories[j].length-1);
+						}
+						#end
+
 						if(weekFile != null && (isStoryMode == null || (isStoryMode && !weekFile.hideStoryMode) || (!isStoryMode && !weekFile.hideFreeplay))) {
 							weeksLoaded.set(sexList[i], weekFile);
 							weeksList.push(sexList[i]);
@@ -95,11 +109,40 @@ class WeekData {
 		}
 	}
 
+	private static function addWeek(weekToCheck:String, path:String, directory:String, i:Int, originalLength:Int)
+	{
+		if(!weeksLoaded.exists(weekToCheck))
+		{
+			var week:WeekFile = getWeekFile(path);
+			if(week != null)
+			{
+				var weekFile:WeekData = new WeekData(week);
+				if(i >= originalLength)
+				{
+					#if MODS_ALLOWED
+					weekFile.folder = directory.substring(Paths.mods().length, directory.length-1);
+					#end
+				}
+				if((PlayState.isStoryMode && !weekFile.hideStoryMode) || (!PlayState.isStoryMode && !weekFile.hideFreeplay))
+				{
+					weeksLoaded.set(weekToCheck, weekFile);
+					weeksList.push(weekToCheck);
+				}
+			}
+		}
+	}
+
 	private static function getWeekFile(path:String):WeekFile {
 		var rawJson:String = null;
+		#if MODS_ALLOWED
+		if(FileSystem.exists(path)) {
+			rawJson = File.getContent(path);
+		}
+		#else
 		if(OpenFlAssets.exists(path)) {
 			rawJson = Assets.getText(path);
 		}
+		#end
 
 		if(rawJson != null && rawJson.length > 0) {
 			return cast Json.parse(rawJson);
@@ -120,9 +163,6 @@ class WeekData {
 	}
 
 	public static function setDirectoryFromWeek(?data:WeekData = null) {
-		Paths.currentModDirectory = '';
-		if(data != null && data.folder != null && data.folder.length > 0) {
-			Paths.currentModDirectory = data.folder;
-		}
+
 	}
 }

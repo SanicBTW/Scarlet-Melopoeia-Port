@@ -1,10 +1,6 @@
 package;
 
-import openfl.display.FPS;
-import lime.app.Application;
-import openfl.Lib;
-import ColorSwap;
-import CheckboxThingie;
+import flixel.addons.transition.FlxTransitionableState;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -29,34 +25,28 @@ import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
-import flixel.input.mouse.FlxMouseEventManager;
 
 using StringTools;
 
 // TO DO: Redo the menu creation system for not being as dumb
 class OptionsState extends MusicBeatState
 {
-	var options:Array<String> = ['Controls', #if mobileC 'Mobile Controls', #end 'Notes', 'Preferences'];
+	var options:Array<String> = ['Notes', #if android 'Mobile Controls' , #end 'Controls', 'Preferences' #if sys , 'Music Test State' #end];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
 
-    //gotta follow kade stuff
-    public static var instance:OptionsState;
-    public var acceptInput = true;
-
 	override function create() {
-        instance = this;
 		#if desktop
 		DiscordClient.changePresence("Options Menu", null);
 		#end
 
-		var menuBG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		menuBG.color = 0xFFea71fd;
+		menuBG = new FlxSprite().loadGraphic(Paths.image('menuBG'));
+		menuBG.color = FlxColor.fromRGB(146, 113, 253);
 		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
 		menuBG.updateHitbox();
 		menuBG.screenCenter();
-		menuBG.antialiasing = FlxG.save.data.globalAntialiasing;
+		menuBG.antialiasing = ClientPrefs.globalAntialiasing;
 		add(menuBG);
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
@@ -71,8 +61,8 @@ class OptionsState extends MusicBeatState
 		}
 		changeSelection();
 
-		#if mobileC
-			addVirtualPad(FULL, A_B);
+		#if android
+		addVirtualPad(LEFT_FULL, A_B);
 		#end
 
 		super.create();
@@ -80,47 +70,56 @@ class OptionsState extends MusicBeatState
 
 	override function closeSubState() {
 		super.closeSubState();
+		FlxTransitionableState.skipNextTransOut = true;
+		FlxG.resetState();
+		ClientPrefs.saveSettings();
 		changeSelection();
 	}
 
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
-        if(acceptInput)
-        {
-            if (controls.UI_UP_P) {
-                changeSelection(-1);
-            }
-            if (controls.UI_DOWN_P) {
-                changeSelection(1);
-            }
-    
-            if (controls.BACK) {
-				ClientPrefs.saveSettings();
-                FlxG.sound.play(Paths.sound('cancelMenu'));
-                MusicBeatState.switchState(new MainMenuState());
-            }
-    
-            if (controls.ACCEPT) {
-                for (item in grpOptions.members) {
-                    item.alpha = 0;
-                }
-    
-                switch(options[curSelected]) {
-                    case 'Notes':
-                        openSubState(new NotesSubstate());
-    
-                    case 'Controls':
-                        openSubState(new KeyBindMenu());
+		if (controls.UI_UP_P) {
+			changeSelection(-1);
+		}
+		if (controls.UI_DOWN_P) {
+			changeSelection(1);
+		}
 
-					case 'Mobile Controls':
-						MusicBeatState.switchState(new options.CustomControlsState());
+		if (controls.BACK) {
+			FlxG.sound.play(Paths.sound('cancelMenu'));
+			MusicBeatState.switchState(new MainMenuState());
+		}
 
-                    case 'Preferences':
-                        openSubState(new PreferencesSubstate());
-                }
-            }
-        }
+		if (controls.ACCEPT) {
+			#if android
+			removeVirtualPad();
+			#end
+			for (item in grpOptions.members) {
+				item.alpha = 0;
+			}
+
+			switch(options[curSelected]) {
+				case 'Notes':
+					openSubState(new NotesSubstate());
+
+				#if android
+				case 'Mobile Controls':
+					openSubState(new android.AndroidControlsSubState());
+				#end
+
+				case 'Controls':
+					openSubState(new ControlsSubstate());
+
+				case 'Preferences':
+					openSubState(new PreferencesSubstate());
+			
+				#if sys
+				case 'Music Test State':
+					MusicBeatState.switchState(new MusicTState());
+				#end
+			}
+		}
 	}
 	
 	function changeSelection(change:Int = 0) {
@@ -167,10 +166,10 @@ class NotesSubstate extends MusicBeatSubstate
 		grpNumbers = new FlxTypedGroup<Alphabet>();
 		add(grpNumbers);
 
-		for (i in 0...FlxG.save.data.arrowHSV.length) {
+		for (i in 0...ClientPrefs.arrowHSV.length) {
 			var yPos:Float = (165 * i) + 35;
 			for (j in 0...3) {
-				var optionText:Alphabet = new Alphabet(0, yPos, Std.string(FlxG.save.data.arrowHSV[i][j]));
+				var optionText:Alphabet = new Alphabet(0, yPos, Std.string(ClientPrefs.arrowHSV[i][j]));
 				optionText.x = posX + (225 * j) + 100 - ((optionText.lettersArray.length * 90) / 2);
 				grpNumbers.add(optionText);
 			}
@@ -188,22 +187,22 @@ class NotesSubstate extends MusicBeatSubstate
 					note.animation.addByPrefix('idle', 'red0');
 			}
 			note.animation.play('idle');
-			note.antialiasing = FlxG.save.data.globalAntialiasing;
+			note.antialiasing = ClientPrefs.globalAntialiasing;
 			grpNotes.add(note);
 
 			var newShader:ColorSwap = new ColorSwap();
 			note.shader = newShader.shader;
-			newShader.hue = FlxG.save.data.arrowHSV[i][0] / 360;
-			newShader.saturation = FlxG.save.data.arrowHSV[i][1] / 100;
-			newShader.brightness = FlxG.save.data.arrowHSV[i][2] / 100;
+			newShader.hue = ClientPrefs.arrowHSV[i][0] / 360;
+			newShader.saturation = ClientPrefs.arrowHSV[i][1] / 100;
+			newShader.brightness = ClientPrefs.arrowHSV[i][2] / 100;
 			shaderArray.push(newShader);
 		}
 		hsvText = new Alphabet(0, 0, "Hue    Saturation  Brightness", false, false, 0, 0.65);
 		add(hsvText);
 		changeSelection();
 
-		#if mobileC
-			addVirtualPad(FULL, A_B);
+		#if android
+		addVirtualPad(LEFT_FULL, A_B);
 		#end
 	}
 
@@ -300,7 +299,7 @@ class NotesSubstate extends MusicBeatSubstate
 			for (j in 0...3) {
 				var item2 = grpNumbers.members[(i * 3) + j];
 				item2.x = item.x + 265 + (225 * (j % 3)) - (30 * item2.lettersArray.length) / 2;
-				if(FlxG.save.data.arrowHSV[i][j] < 0) {
+				if(ClientPrefs.arrowHSV[i][j] < 0) {
 					item2.x -= 20;
 				}
 			}
@@ -334,11 +333,11 @@ class NotesSubstate extends MusicBeatSubstate
 	function changeSelection(change:Int = 0) {
 		curSelected += change;
 		if (curSelected < 0)
-			curSelected = Std.int(FlxG.save.data.arrowHSV.length) - 1;
-		if (curSelected >= FlxG.save.data.arrowHSV.length)
+			curSelected = ClientPrefs.arrowHSV.length-1;
+		if (curSelected >= ClientPrefs.arrowHSV.length)
 			curSelected = 0;
 
-		curValue = FlxG.save.data.arrowHSV[curSelected][typeSelected];
+		curValue = ClientPrefs.arrowHSV[curSelected][typeSelected];
 		updateValue();
 
 		for (i in 0...grpNumbers.length) {
@@ -368,7 +367,7 @@ class NotesSubstate extends MusicBeatSubstate
 		if (typeSelected > 2)
 			typeSelected = 0;
 
-		curValue = FlxG.save.data.arrowHSV[curSelected][typeSelected];
+		curValue = ClientPrefs.arrowHSV[curSelected][typeSelected];
 		updateValue();
 
 		for (i in 0...grpNumbers.length) {
@@ -382,7 +381,7 @@ class NotesSubstate extends MusicBeatSubstate
 
 	function resetValue(selected:Int, type:Int) {
 		curValue = 0;
-		FlxG.save.data.arrowHSV[selected][type] = 0;
+		ClientPrefs.arrowHSV[selected][type] = 0;
 		switch(type) {
 			case 0: shaderArray[selected].hue = 0;
 			case 1: shaderArray[selected].saturation = 0;
@@ -404,7 +403,7 @@ class NotesSubstate extends MusicBeatSubstate
 			curValue = max;
 		}
 		roundedValue = Math.round(curValue);
-		FlxG.save.data.arrowHSV[curSelected][typeSelected] = roundedValue;
+		ClientPrefs.arrowHSV[curSelected][typeSelected] = roundedValue;
 
 		switch(typeSelected) {
 			case 0: shaderArray[curSelected].hue = roundedValue / 360;
@@ -415,59 +414,330 @@ class NotesSubstate extends MusicBeatSubstate
 	}
 }
 
+
+
+class ControlsSubstate extends MusicBeatSubstate {
+	private static var curSelected:Int = 1;
+	private static var curAlt:Bool = false;
+
+	private static var defaultKey:String = 'Reset to Default Keys';
+
+	var optionShit:Array<String> = [
+		'NOTES',
+		ClientPrefs.keyBinds[0][1],
+		ClientPrefs.keyBinds[1][1],
+		ClientPrefs.keyBinds[2][1],
+		ClientPrefs.keyBinds[3][1],
+		'',
+		'UI',
+		ClientPrefs.keyBinds[4][1],
+		ClientPrefs.keyBinds[5][1],
+		ClientPrefs.keyBinds[6][1],
+		ClientPrefs.keyBinds[7][1],
+		'',
+		ClientPrefs.keyBinds[8][1],
+		ClientPrefs.keyBinds[9][1],
+		ClientPrefs.keyBinds[10][1],
+		ClientPrefs.keyBinds[11][1],
+		'',
+		defaultKey];
+
+	private var grpOptions:FlxTypedGroup<Alphabet>;
+	private var grpInputs:Array<AttachedText> = [];
+	private var controlArray:Array<FlxKey> = [];
+	var rebindingKey:Int = -1;
+	var nextAccept:Int = 5;
+
+	public function new() {
+		super();
+		grpOptions = new FlxTypedGroup<Alphabet>();
+		add(grpOptions);
+
+		controlArray = ClientPrefs.lastControls.copy();
+		for (i in 0...optionShit.length) {
+			var isCentered:Bool = false;
+			var isDefaultKey:Bool = (optionShit[i] == defaultKey);
+			if(unselectableCheck(i, true)) {
+				isCentered = true;
+			}
+
+			var optionText:Alphabet = new Alphabet(0, (10 * i), optionShit[i], (!isCentered || isDefaultKey), false);
+			optionText.isMenuItem = true;
+			if(isCentered) {
+				optionText.screenCenter(X);
+				optionText.forceX = optionText.x;
+				optionText.yAdd = -55;
+			} else {
+				optionText.forceX = 200;
+			}
+			optionText.yMult = 60;
+			optionText.targetY = i;
+			grpOptions.add(optionText);
+
+			if(!isCentered) {
+				addBindTexts(optionText);
+			}
+		}
+		changeSelection();
+
+		#if android
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
+	}
+
+	var leaving:Bool = false;
+	var bindingTime:Float = 0;
+	override function update(elapsed:Float) {
+		if(rebindingKey < 0) {
+			if (controls.UI_UP_P) {
+				changeSelection(-1);
+			}
+			if (controls.UI_DOWN_P) {
+				changeSelection(1);
+			}
+			if (controls.UI_LEFT_P || controls.UI_RIGHT_P) {
+				changeAlt();
+			}
+
+			if (controls.BACK) {
+				ClientPrefs.reloadControls(controlArray);
+				grpOptions.forEachAlive(function(spr:Alphabet) {
+					spr.alpha = 0;
+				});
+				for (i in 0...grpInputs.length) {
+					var spr:AttachedText = grpInputs[i];
+					if(spr != null) {
+						spr.alpha = 0;
+					}
+				}
+				close();
+				FlxG.sound.play(Paths.sound('cancelMenu'));
+			}
+
+			if(controls.ACCEPT && nextAccept <= 0) {
+				if(optionShit[curSelected] == defaultKey) {
+					controlArray = ClientPrefs.defaultKeys.copy();
+					reloadKeys();
+					changeSelection();
+					FlxG.sound.play(Paths.sound('confirmMenu'));
+				} else {
+					bindingTime = 0;
+					rebindingKey = getSelectedKey();
+					if(rebindingKey > -1) {
+						grpInputs[rebindingKey].visible = false;
+						FlxG.sound.play(Paths.sound('scrollMenu'));
+					} else {
+						FlxG.log.warn('Error! No input found/badly configured');
+						FlxG.sound.play(Paths.sound('cancelMenu'));
+					}
+				}
+			}
+		} else {
+			var keyPressed:Int = FlxG.keys.firstJustPressed();
+			if (keyPressed > -1) {
+				controlArray[rebindingKey] = keyPressed;
+				var opposite:Int = rebindingKey + (rebindingKey % 2 == 1 ? -1 : 1);
+				trace('Rebinded key with ID: ' + rebindingKey + ', Opposite is: ' + opposite);
+				if(controlArray[opposite] == controlArray[rebindingKey]) {
+					controlArray[opposite] = NONE;
+				}
+
+				reloadKeys();
+				FlxG.sound.play(Paths.sound('confirmMenu'));
+				rebindingKey = -1;
+			}
+
+			bindingTime += elapsed;
+			if(bindingTime > 5) {
+				grpInputs[rebindingKey].visible = true;
+				FlxG.sound.play(Paths.sound('scrollMenu'));
+				rebindingKey = -1;
+				bindingTime = 0;
+			}
+		}
+
+		if(nextAccept > 0) {
+			nextAccept -= 1;
+		}
+		super.update(elapsed);
+	}
+	
+	function changeSelection(change:Int = 0) {
+		do {
+			curSelected += change;
+			if (curSelected < 0)
+				curSelected = optionShit.length - 1;
+			if (curSelected >= optionShit.length)
+				curSelected = 0;
+		} while(unselectableCheck(curSelected));
+
+		var bullShit:Int = 0;
+
+		for (i in 0...grpInputs.length) {
+			grpInputs[i].alpha = 0.6;
+		}
+
+		for (item in grpOptions.members) {
+			item.targetY = bullShit - curSelected;
+			bullShit++;
+
+			if(!unselectableCheck(bullShit-1)) {
+				item.alpha = 0.6;
+				if (item.targetY == 0) {
+					item.alpha = 1;
+					for (i in 0...grpInputs.length) {
+						if(grpInputs[i].sprTracker == item && grpInputs[i].isAlt == curAlt) {
+							grpInputs[i].alpha = 1;
+						}
+					}
+				}
+			}
+		}
+		FlxG.sound.play(Paths.sound('scrollMenu'));
+	}
+
+	function changeAlt() {
+		curAlt = !curAlt;
+		for (i in 0...grpInputs.length) {
+			if(grpInputs[i].sprTracker == grpOptions.members[curSelected]) {
+				grpInputs[i].alpha = 0.6;
+				if(grpInputs[i].isAlt == curAlt) {
+					grpInputs[i].alpha = 1;
+				}
+			}
+		}
+		FlxG.sound.play(Paths.sound('scrollMenu'));
+	}
+
+	private function unselectableCheck(num:Int, ?checkDefaultKey:Bool = false):Bool {
+		if(optionShit[num] == defaultKey) {
+			return checkDefaultKey;
+		}
+
+		for (i in 0...ClientPrefs.keyBinds.length) {
+			if(ClientPrefs.keyBinds[i][1] == optionShit[num]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private function getSelectedKey():Int {
+		var altValue:Int = (curAlt ? 1 : 0);
+		for (i in 0...ClientPrefs.keyBinds.length) {
+			if(ClientPrefs.keyBinds[i][1] == optionShit[curSelected]) {
+				return i*2 + altValue;
+			}
+		}
+		return -1;
+	}
+
+	private function addBindTexts(optionText:Alphabet) {
+		var text1 = new AttachedText(InputFormatter.getKeyName(controlArray[grpInputs.length]), 400, -55);
+		text1.setPosition(optionText.x + 400, optionText.y - 55);
+		text1.sprTracker = optionText;
+		grpInputs.push(text1);
+		add(text1);
+
+		var text2 = new AttachedText(InputFormatter.getKeyName(controlArray[grpInputs.length]), 650, -55);
+		text2.setPosition(optionText.x + 650, optionText.y - 55);
+		text2.sprTracker = optionText;
+		text2.isAlt = true;
+		grpInputs.push(text2);
+		add(text2);
+	}
+
+	function reloadKeys() {
+		while(grpInputs.length > 0) {
+			var item:AttachedText = grpInputs[0];
+			grpInputs.remove(item);
+			remove(item);
+		}
+
+		for (i in 0...grpOptions.length) {
+			if(!unselectableCheck(i, true)) {
+				addBindTexts(grpOptions.members[i]);
+			}
+		}
+
+
+		var bullShit:Int = 0;
+		for (i in 0...grpInputs.length) {
+			grpInputs[i].alpha = 0.6;
+		}
+
+		for (item in grpOptions.members) {
+			item.targetY = bullShit - curSelected;
+			bullShit++;
+
+			if(!unselectableCheck(bullShit-1)) {
+				item.alpha = 0.6;
+				if (item.targetY == 0) {
+					item.alpha = 1;
+					for (i in 0...grpInputs.length) {
+						if(grpInputs[i].sprTracker == item && grpInputs[i].isAlt == curAlt) {
+							grpInputs[i].alpha = 1;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
 class PreferencesSubstate extends MusicBeatSubstate
 {
 	private static var curSelected:Int = 0;
-    static var unselectableOptions:Array<String> = [
-		'GRAPHICS', //order is here lol
+	private static var index:Int = 0;
+	static var unselectableOptions:Array<String> = [
+		'GRAPHICS',
+		'GAMEPLAY',
 		'VISUALS AND UI',
-        'GAMEPLAY',
-		'FEATURES'
-    ];
-    static var noCheckbox:Array<String> = [
+		'AUDIO',
+		'OPTIMIZATION',
+		'STORAGE ACCESS'
+	];
+	static var noCheckbox:Array<String> = [
 		'Framerate',
-		'Score Type',
-		'Time Bar',
-		'Health Bar Opacity',
-		'Arrows Opacity',
-		'Enemy Arrows Opacity',
-		'Note Delay'
-    ];
-    static var options:Array<String> = [
+		'Note Delay',
+		'Chart priority',
+		'Pause music'
+	];
+
+	static var options:Array<String> = [
 		'GRAPHICS',
 		'Low Quality',
 		'Anti-Aliasing',
 		#if !html5
-		'Framerate', //gotta test this one though
+		'Framerate', //Apparently 120FPS isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
 		#end
-		'Presistent Cached Data',
-		'VISUALS AND UI',
-		'Note Splashes',
-		'Score Type',
-		'FPS Counter',
-		'Memory Counter',
-		'Play Hit Sounds', //ayo, visuals and ui??
-		'Icon Boping',
-		'Hide HUD',
-		'Health Counter',
-		'Time Bar',
-		'Flashing Lights',
-		'Camera Zooms',
-		'Judgements',
-		'KE Timebar',
-		'Health Bar Opacity',
-		'Arrows Opacity',
-		'Enemy Arrows Opacity',
-        'GAMEPLAY',
+		'GAMEPLAY',
 		'Downscroll',
 		'Middlescroll',
 		'Ghost Tapping',
-		'No Antimash',
 		'Note Delay',
-		'FEATURES',
-		'Constant Dodging',
-		'Vine Boom SFX'
-    ];
+		'Camera movement on note press',
+		'VISUALS AND UI',
+		'FPS Counter',
+		'Memory Counter',
+		'Hide HUD',
+		'Hide Song Length',
+		'Flashing Lights',
+		'Camera Zooms',
+		'Icon Boping',
+		'AUDIO',
+		'Pause music',
+		'OPTIMIZATION',
+		//add again the only notes option
+		'Disable score tween',
+		'Hide Health Bar',
+		#if sys
+		'STORAGE ACCESS',
+		'Chart priority'
+		#end
+	];
 
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private var checkboxArray:Array<CheckboxThingie> = [];
@@ -475,15 +745,11 @@ class PreferencesSubstate extends MusicBeatSubstate
 	private var grpTexts:FlxTypedGroup<AttachedText>;
 	private var textNumber:Array<Int> = [];
 
-	private var characterLayer:FlxTypedGroup<Character>;
-	private var showCharacter:Character = null;
 	private var descText:FlxText;
 
 	public function new()
 	{
 		super();
-		characterLayer = new FlxTypedGroup<Character>();
-		add(characterLayer);
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
@@ -500,8 +766,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 				optionText.screenCenter(X);
 				optionText.forceX = optionText.x;
 			} else {
-				optionText.x += 200;
-				optionText.forceX = 200;
+				optionText.x += 300;
+				optionText.forceX = 300;
 			}
 			optionText.yMult = 90;
 			optionText.targetY = i;
@@ -516,18 +782,18 @@ class PreferencesSubstate extends MusicBeatSubstate
 					}
 				}
 
-				if(useCheckbox) { 
+				if(useCheckbox) {
 					var checkbox:CheckboxThingie = new CheckboxThingie(optionText.x - 105, optionText.y, false);
 					checkbox.sprTracker = optionText;
 					checkboxArray.push(checkbox);
 					checkboxNumber.push(i);
 					add(checkbox);
-				} else { 
+				} else {
 					var valueText:AttachedText = new AttachedText('0', optionText.width + 80);
 					valueText.sprTracker = optionText;
 					grpTexts.add(valueText);
 					textNumber.push(i);
-				} 
+				}
 			}
 		}
 
@@ -546,8 +812,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 		changeSelection();
 		reloadValues();
 
-		#if mobileC
-		addVirtualPad(FULL, A_B);
+		#if android
+		addVirtualPad(LEFT_FULL, A_B);
 		#end
 	}
 
@@ -577,9 +843,6 @@ class PreferencesSubstate extends MusicBeatSubstate
 					spr.alpha = 0;
 				}
 			}
-			if(showCharacter != null) {
-				showCharacter.alpha = 0;
-			}
 			descText.alpha = 0;
 			close();
 			FlxG.sound.play(Paths.sound('cancelMenu'));
@@ -596,63 +859,86 @@ class PreferencesSubstate extends MusicBeatSubstate
 		if(usesCheckbox) {
 			if(controls.ACCEPT && nextAccept <= 0) {
 				switch(options[curSelected]) {
-					case 'Low Quality':
-						ClientPrefs.lowQuality = !ClientPrefs.lowQuality;
-					case 'Anti-Aliasing':
-						ClientPrefs.globalAntialiasing = !ClientPrefs.globalAntialiasing;
-					case 'Presistent Cached Data':
-						ClientPrefs.imagesPersist = !ClientPrefs.imagesPersist;
-					case 'Note Splashes':
-						ClientPrefs.noteSplashes = !ClientPrefs.noteSplashes;
 					case 'FPS Counter':
 						ClientPrefs.showFPS = !ClientPrefs.showFPS;
 						if(Main.fpsVar != null)
-							Main.fpsVar.visible = ClientPrefs.showFPS;				
-					case 'Memory Counter':
-						ClientPrefs.memoryCounter = !ClientPrefs.memoryCounter;
-						if(Main.memoryCounter != null)
-							Main.memoryCounter.visible = ClientPrefs.memoryCounter;	
-					case 'Play Hit Sounds':
-						ClientPrefs.playHitSounds = !ClientPrefs.playHitSounds;
-					case 'Icon Boping':
-						ClientPrefs.iconBoping = !ClientPrefs.iconBoping;
-					case 'Hide HUD':
-						ClientPrefs.hideHud = !ClientPrefs.hideHud;
-					case 'Health Counter':
-						ClientPrefs.healthCounter = !ClientPrefs.healthCounter;
+							Main.fpsVar.visible = ClientPrefs.showFPS;
+
+					case 'Low Quality':
+						ClientPrefs.lowQuality = !ClientPrefs.lowQuality;
+
+					case 'Anti-Aliasing':
+						ClientPrefs.globalAntialiasing = !ClientPrefs.globalAntialiasing;
+						for (item in grpOptions) {
+							item.antialiasing = ClientPrefs.globalAntialiasing;
+						}
+						for (i in 0...checkboxArray.length) {
+							var spr:CheckboxThingie = checkboxArray[i];
+							if(spr != null) {
+								spr.antialiasing = ClientPrefs.globalAntialiasing;
+							}
+						}
+						OptionsState.menuBG.antialiasing = ClientPrefs.globalAntialiasing;
+
+					case 'Note Splashes':
+						ClientPrefs.noteSplashes = !ClientPrefs.noteSplashes;
+
 					case 'Flashing Lights':
 						ClientPrefs.flashing = !ClientPrefs.flashing;
-					case 'Camera Zooms':
-						ClientPrefs.camZooms = !ClientPrefs.camZooms;
-					case 'Judgements':
-						ClientPrefs.judgements = !ClientPrefs.judgements;
-					case 'KE Timebar':
-						ClientPrefs.keTimeBar = !ClientPrefs.keTimeBar;
+
+					case 'Violence':
+						ClientPrefs.violence = !ClientPrefs.violence;
+
+					case 'Swearing':
+						ClientPrefs.cursing = !ClientPrefs.cursing;
+
 					case 'Downscroll':
 						ClientPrefs.downScroll = !ClientPrefs.downScroll;
+
 					case 'Middlescroll':
 						ClientPrefs.middleScroll = !ClientPrefs.middleScroll;
+
 					case 'Ghost Tapping':
 						ClientPrefs.ghostTapping = !ClientPrefs.ghostTapping;
-					case 'No Antimash':
-						ClientPrefs.noAntimash = !ClientPrefs.noAntimash;
-					case 'Constant Dodging':
-						ClientPrefs.constDodging = !ClientPrefs.constDodging;
-					case 'Vine Boom SFX':
-						ClientPrefs.vineBoomDodge = !ClientPrefs.vineBoomDodge;
+
+					case 'Camera Zooms':
+						ClientPrefs.camZooms = !ClientPrefs.camZooms;
+
+					case 'Hide HUD':
+						ClientPrefs.hideHud = !ClientPrefs.hideHud;
+
+					case 'Persistent Cached Data':
+						ClientPrefs.imagesPersist = !ClientPrefs.imagesPersist;
+						FlxGraphic.defaultPersist = ClientPrefs.imagesPersist;
+
+					case 'Hide Song Length':
+						ClientPrefs.hideTime = !ClientPrefs.hideTime;
+
+					case 'Memory Counter':
+						ClientPrefs.showMemory = !ClientPrefs.showMemory;
+						if(Main.memoryVar != null)
+							Main.memoryVar.visible = ClientPrefs.showMemory;
+
+					case 'Disable score tween':
+						ClientPrefs.optDisableScoreTween = !ClientPrefs.optDisableScoreTween;
+					case 'Hide Health Bar':
+						ClientPrefs.optHideHealthBar = !ClientPrefs.optHideHealthBar;
+					case 'Camera movement on note press':
+						ClientPrefs.cameraMovOnNoteP = !ClientPrefs.cameraMovOnNoteP;
+					case 'Icon Boping':
+						ClientPrefs.iconBoping = !ClientPrefs.iconBoping;
 				}
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				reloadValues();
 			}
-		} else if (!usesCheckbox) {
+		} else {
 			if(controls.UI_LEFT || controls.UI_RIGHT) {
 				var add:Int = controls.UI_LEFT ? -1 : 1;
 				if(holdTime > 0.5 || controls.UI_LEFT_P || controls.UI_RIGHT_P)
 				switch(options[curSelected]) {
 					case 'Framerate':
-						//taken from funny 0.3.2-h mod port repo lol
 						ClientPrefs.framerate += add;
-						if(ClientPrefs.framerate < 60) ClientPrefs.framerate = 60;
+						if(ClientPrefs.framerate < 30) ClientPrefs.framerate = 30;
 						else if(ClientPrefs.framerate > 240) ClientPrefs.framerate = 240;
 
 						if(ClientPrefs.framerate > FlxG.drawFramerate) {
@@ -662,33 +948,7 @@ class PreferencesSubstate extends MusicBeatSubstate
 							FlxG.drawFramerate = ClientPrefs.framerate;
 							FlxG.updateFramerate = ClientPrefs.framerate;
 						}
-					case 'Score Type':
-						var availableOptions = ['Psych Engine', 'Kade Engine', 'Disabled'];
-						if(add > availableOptions.length) add = availableOptions.length;
-						else if (add < 0) add = 0;
-						ClientPrefs.scoreType = availableOptions[add];
-					case 'Time Bar':
-						var availableOptions = ['Time Left', 'Time Elapsed', 'Song Name', 'Disabled'];
-						if(add > availableOptions.length ) add = availableOptions.length;
-						else if (add < 0) add = 0;
-						ClientPrefs.timeBarType = availableOptions[add];
-					case 'Health Bar Opacity':
-						var custmadd:Float = controls.UI_LEFT ? -0.1 : 0.1;
-						ClientPrefs.healthBarAlpha += custmadd;
-						if(ClientPrefs.healthBarAlpha < 0) ClientPrefs.healthBarAlpha = 0;
-						else if(ClientPrefs.healthBarAlpha > 1) ClientPrefs.healthBarAlpha = 1;
-					case 'Arrows Opacity':
-						var custmadd:Float = controls.UI_LEFT ? -0.1 : 0.1;
-						ClientPrefs.arrowOpacity += custmadd;
-						if(ClientPrefs.arrowOpacity < 0) ClientPrefs.arrowOpacity = 0;
-						else if(ClientPrefs.arrowOpacity > 1) ClientPrefs.arrowOpacity = 1;
-					case 'Enemy Arrows Opacity':
-						var custmadd:Float = controls.UI_LEFT ? -0.1 : 0.1;
-						ClientPrefs.opponentArrowOpacity += custmadd;
-						if(ClientPrefs.opponentArrowOpacity < 0) ClientPrefs.opponentArrowOpacity = 0;
-						else if(ClientPrefs.opponentArrowOpacity > 1) ClientPrefs.opponentArrowOpacity = 1;
 					case 'Note Delay':
-						//taken from funny 0.3.2-h mod port repo lol
 						var mult:Int = 1;
 						if(holdTime > 1.5) { //Double speed after 1.5 seconds holding
 							mult = 2;
@@ -696,24 +956,43 @@ class PreferencesSubstate extends MusicBeatSubstate
 						ClientPrefs.noteOffset += add * mult;
 						if(ClientPrefs.noteOffset < 0) ClientPrefs.noteOffset = 0;
 						else if(ClientPrefs.noteOffset > 500) ClientPrefs.noteOffset = 500;
+					case 'Chart priority':
+						var options = ['easy', 'normal', 'hard'];
+						if(controls.UI_LEFT_P)
+							changeState(-1, options);
+						else if(controls.UI_RIGHT_P)
+							changeState(1, options);
+						ClientPrefs.chartScanPriority = options[index];
+					case 'Pause music':
+						var options = ['None', 'Breakfast', 'Tea Time'];
+						if(controls.UI_LEFT_P)
+							changeState(-1, options);
+						else if(controls.UI_RIGHT_P)
+							changeState(1, options);
+						ClientPrefs.pauseMusic = options[index];
 				}
 				reloadValues();
 
 				if(holdTime <= 0) FlxG.sound.play(Paths.sound('scrollMenu'));
 				holdTime += elapsed;
 			} else {
-                holdTime = 0;
-            }
-		}
-
-		if(showCharacter != null && showCharacter.animation.curAnim.finished) {
-			showCharacter.dance();
+				holdTime = 0;
+			}
 		}
 
 		if(nextAccept > 0) {
 			nextAccept -= 1;
 		}
 		super.update(elapsed);
+	}
+
+	function changeState(change:Int = 0, options:Array<String>)
+	{
+		index += change;
+		if(index < 0)
+			index = options.length - 1;
+		if(index >= options.length)
+			index = 0;
 	}
 	
 	function changeSelection(change:Int = 0)
@@ -728,61 +1007,53 @@ class PreferencesSubstate extends MusicBeatSubstate
 
 		var daText:String = '';
 		switch(options[curSelected]) {
-			case 'Low Quality':
-				daText = "If checked, disables some background details,\ndecreases loading times and improves performance.";
-			case 'Anti-Aliasing':
-				daText = "If unchecked, disables anti-aliasing, increases performance\nat the cost of sharper visuals.";
 			case 'Framerate':
-				daText = "Pretty self explanatory, isn't it?";
-			case 'Presistent Cached Data':
-				daText = "If checked, images loaded will stay in memory\nuntil the game is closed, this increases memory usage,\nbut basically makes reloading times instant.";
-			case 'Note Splashes':
-				daText = "If unchecked, hitting \"Sick!\" notes won't show particles.";
-			case 'Score Type':
-				daText = "What should the score be like?";
+				daText = "Pretty self explanatory, isn't it?\nDefault value is 60.";
+			case 'Note Delay':
+				daText = "Changes how late a note is spawned.\nUseful for preventing audio lag from wireless earphones.";
 			case 'FPS Counter':
 				daText = "If unchecked, hides FPS Counter.";
-			case 'Memory Counter':
-				daText = "If checked, enables memory counter.";
-			case 'Play Hit Sounds':
-				daText = "If checked, enables hit sounds.";
-			case 'Icon Boping':
-				daText = "If checked, enables icon Boping.";
-			case 'Hide HUD':
-				daText = "If checked, hides most HUD elements.";
-			case 'Health Counter':
-				daText = "If checked, enables the health counter.";
-			case 'Time Bar':
-				daText = "What should the Time Bar display?";
+			case 'Low Quality':
+				daText = "If checked, disables some background details,\ndecreases loading times and improves performance.";
+			case 'Persistent Cached Data':
+				daText = "If checked, images loaded will stay in memory\nuntil the game is closed, this increases memory usage,\nbut basically makes reloading times instant.";
+			case 'Anti-Aliasing':
+				daText = "If unchecked, disables anti-aliasing, increases performance\nat the cost of the graphics not looking as smooth.";
+			case 'Downscroll':
+				daText = "If checked, notes go Down instead of Up, simple enough.";
+			case 'Middlescroll':
+				daText = "If checked, hides Opponent's notes and your notes get centered.";
+			case 'Ghost Tapping':
+				daText = "If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit.";
+			case 'Swearing':
+				daText = "If unchecked, your mom won't be angry at you.";
+			case 'Violence':
+				daText = "If unchecked, you won't get disgusted as frequently.";
+			case 'Note Splashes':
+				daText = "If unchecked, hitting \"Sick!\" notes won't show particles.";
 			case 'Flashing Lights':
 				daText = "Uncheck this if you're sensitive to flashing lights!";
 			case 'Camera Zooms':
 				daText = "If unchecked, the camera won't zoom in on a beat hit.";
-			case 'Judgements':
-				daText = "If unchecked, hides judgements.";
-			case 'KE Timebar':
-				daText = "If checked, uses the KE timebar.";
-			case 'Health Bar Opacity':
-				daText = "How Opaque should the health bar and icons be.";
-			case 'Arrows Opacity':
-				daText = "How Opaque should the arrows be.";
-			case 'Enemy Arrows Opacity':
-				daText = "How Opaque should the opponent arrows be.";
-			case 'Downscroll':
-				daText = "If checked, notes go Down instead of Up, simple enough.";
-			case 'Middlescroll':
-				daText = "If checked, your notes get centered.";
-			case 'Ghost Tapping':
-				daText = "If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit.";
-			case 'No Antimash':
-				daText = "If checked, disables antimash.";
-			case 'Note Delay':
-				daText = "Changes how late a note is spawned.\nUseful for preventing audio lag from wireless earphones.";
-
-			case 'Constant Dodging':
-				daText = "If enabled, you will have to constantly dodge, easy BUGGY ATM";
-			case 'Vine Boom SFX':
-				daText = "When dodging a vine boom sfx will play";
+			case 'Hide HUD':
+				daText = "If checked, hides most HUD elements.";
+			case 'Hide Song Length':
+				daText = "If checked, the bar showing how much time is left\nwill be hidden.";
+			case "Memory Counter":
+				daText = "Displays a memory counter";
+			
+			case 'Disable score tween':
+				daText = 'Disables score bop on sick';
+			case 'Hide Health Bar':
+				daText = 'Hides health bar and replaces it with a percentage';
+			case 'Camera movement on note press':
+				daText = 'Moves the camera to the note direction';
+			case 'Chart priority':
+				daText = "Change the chart scan priority when\nsearching charts";
+			case 'Icon Boping':
+				daText = "If checked, icons bop";
+			case 'Pause music':
+				daText = "What song do you prefer for the Pause Screen?";
 		}
 		descText.text = daText;
 
@@ -817,18 +1088,6 @@ class PreferencesSubstate extends MusicBeatSubstate
 			}
 		}
 
-		if(options[curSelected] == 'Anti-Aliasing') {
-			if(showCharacter == null) {
-				showCharacter = new Character(840, 170, 'bf', true);
-				showCharacter.setGraphicSize(Std.int(showCharacter.width * 0.8));
-				showCharacter.updateHitbox();
-				showCharacter.dance();
-				characterLayer.add(showCharacter);
-			}
-		} else if(showCharacter != null) {
-			characterLayer.clear();
-			showCharacter = null;
-		}
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 	}
 
@@ -838,47 +1097,44 @@ class PreferencesSubstate extends MusicBeatSubstate
 			if(checkbox != null) {
 				var daValue:Bool = false;
 				switch(options[checkboxNumber[i]]) {
+					case 'FPS Counter':
+						daValue = ClientPrefs.showFPS;
 					case 'Low Quality':
 						daValue = ClientPrefs.lowQuality;
 					case 'Anti-Aliasing':
 						daValue = ClientPrefs.globalAntialiasing;
-					case 'Presistent Cached Data':
-						daValue = ClientPrefs.imagesPersist;
 					case 'Note Splashes':
 						daValue = ClientPrefs.noteSplashes;
-					case 'FPS Counter':
-						daValue = ClientPrefs.showFPS;
-					case 'Memory Counter':
-						daValue = ClientPrefs.memoryCounter;
-					case 'Play Hit Sounds':
-						daValue = ClientPrefs.playHitSounds;
-					case 'Icon Boping':
-						daValue = ClientPrefs.iconBoping;
-					case 'Hide HUD':
-						daValue = ClientPrefs.hideHud;
-					case 'Health Counter':
-						daValue = ClientPrefs.healthCounter;
 					case 'Flashing Lights':
 						daValue = ClientPrefs.flashing;
-					case 'Camera Zooms':
-						daValue = ClientPrefs.camZooms;
-					case 'Judgements':
-						daValue = ClientPrefs.judgements;
-					case 'KE Timebar':
-						daValue = ClientPrefs.keTimeBar;
 					case 'Downscroll':
 						daValue = ClientPrefs.downScroll;
 					case 'Middlescroll':
 						daValue = ClientPrefs.middleScroll;
 					case 'Ghost Tapping':
 						daValue = ClientPrefs.ghostTapping;
-					case 'No Antimash':
-						daValue = ClientPrefs.noAntimash;
-
-					case 'Constant Dodging':
-						daValue = ClientPrefs.constDodging;
-					case 'Vine Boom SFX':
-						daValue = ClientPrefs.vineBoomDodge;
+					case 'Swearing':
+						daValue = ClientPrefs.cursing;
+					case 'Violence':
+						daValue = ClientPrefs.violence;
+					case 'Camera Zooms':
+						daValue = ClientPrefs.camZooms;
+					case 'Hide HUD':
+						daValue = ClientPrefs.hideHud;
+					case 'Persistent Cached Data':
+						daValue = ClientPrefs.imagesPersist;
+					case 'Hide Song Length':
+						daValue = ClientPrefs.hideTime;
+					case 'Memory Counter':
+						daValue = ClientPrefs.showMemory;
+					case 'Disable score tween':
+						daValue = ClientPrefs.optDisableScoreTween;
+					case 'Hide Health Bar':
+						daValue = ClientPrefs.optHideHealthBar;
+					case 'Camera movement on note press':
+						daValue = ClientPrefs.cameraMovOnNoteP;
+					case 'Icon Boping':
+						daValue = ClientPrefs.iconBoping;
 				}
 				checkbox.daValue = daValue;
 			}
@@ -889,19 +1145,13 @@ class PreferencesSubstate extends MusicBeatSubstate
 				var daText:String = '';
 				switch(options[textNumber[i]]) {
 					case 'Framerate':
-						daText = ClientPrefs.framerate + "FPS";
-					case 'Score Type':
-						daText = ClientPrefs.scoreType;
-					case 'Time Bar':
-						daText = ClientPrefs.timeBarType;
-					case 'Health Bar Opacity':
-						daText = '' + ClientPrefs.healthBarAlpha;
-					case 'Arrows Opacity':
-						daText = '' + ClientPrefs.arrowOpacity;
-					case 'Enemy Arrows Opacity':
-						daText = '' + ClientPrefs.opponentArrowOpacity;
+						daText = '' + ClientPrefs.framerate;
 					case 'Note Delay':
-						daText = ClientPrefs.noteOffset + "ms";
+						daText = ClientPrefs.noteOffset + 'ms';
+					case 'Chart priority':
+						daText = ClientPrefs.chartScanPriority;
+					case 'Pause music':
+						daText = ClientPrefs.pauseMusic;
 				}
 				var lastTracker:FlxSprite = text.sprTracker;
 				text.sprTracker = null;

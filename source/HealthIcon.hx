@@ -12,6 +12,9 @@ class HealthIcon extends FlxSprite
 	private var isPlayer:Bool = false;
 	private var char:String = '';
 
+	// The following icons have antialiasing forced to be disabled
+	var noAntialiasing:Array<String> = ['bf-pixel', 'senpai', 'spirit'];
+
 	public function new(char:String = 'bf', isPlayer:Bool = false)
 	{
 		super();
@@ -47,8 +50,11 @@ class HealthIcon extends FlxSprite
 			this.char = char;
 
 			antialiasing = ClientPrefs.globalAntialiasing;
-			if(char.endsWith('-pixel')) {
-				antialiasing = false;
+			for (i in 0...noAntialiasing.length) {
+				if(char == noAntialiasing[i]) {
+					antialiasing = false;
+					break;
+				}
 			}
 		}
 	}

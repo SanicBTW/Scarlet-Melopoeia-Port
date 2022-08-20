@@ -8,7 +8,6 @@ import openfl.Lib;
 import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
-import lime.system.System;
 
 class Main extends Sprite
 {
@@ -20,9 +19,7 @@ class Main extends Sprite
 	var skipSplash:Bool = true; // Whether to skip the flixel splash screen that appears in release mode.
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 	public static var fpsVar:FPS;
-	public static var memoryCounter:MemoryCounter;
-
-	public static var path:String = System.applicationStorageDirectory;	
+	public static var memoryVar:MemoryCounter;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
@@ -73,8 +70,6 @@ class Main extends Sprite
 		initialState = TitleState;
 		#end
 
-		//ClientPrefs.startControls();
-		
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
@@ -83,11 +78,11 @@ class Main extends Sprite
 			fpsVar.visible = ClientPrefs.showFPS;
 		}
 
-		memoryCounter = new MemoryCounter(10, 3, 0xFFFFFF);
-                addChild(memoryCounter);
-                if(memoryCounter != null) {
-                        memoryCounter.visible = ClientPrefs.memoryCounter;
-                }
+		memoryVar = new MemoryCounter(10, 15);
+		addChild(memoryVar);
+		if(memoryVar != null){
+			memoryVar.visible = ClientPrefs.showMemory;
+		}
 
 		#if html5
 		FlxG.autoPause = false;

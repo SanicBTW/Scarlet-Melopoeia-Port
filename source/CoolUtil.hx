@@ -1,12 +1,14 @@
 package;
 
+import flixel.util.FlxColor;
 import flixel.FlxG;
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 import lime.utils.AssetLibrary;
 import lime.utils.AssetManifest;
-import openfl.utils.Assets;
-import flixel.util.FlxColor;
+#if sys
+import sys.io.File;
+#end
 
 using StringTools;
 
@@ -33,8 +35,7 @@ class CoolUtil
 
 	public static function coolTextFile(path:String):Array<String>
 	{
-		var daList:Array<String> = [];
-		if(Assets.exists(path)) daList = Assets.getText(path).trim().split('\n');
+		var daList:Array<String> = Assets.getText(path).trim().split('\n');
 
 		for (i in 0...daList.length)
 		{
@@ -43,30 +44,6 @@ class CoolUtil
 
 		return daList;
 	}
-
-	public static function smoothColorChange(from:FlxColor, to:FlxColor, speed:Float = 0.045):FlxColor
-        {
-
-            var result:FlxColor = FlxColor.fromRGBFloat
-            (
-                CoolUtil.coolLerp(from.redFloat, to.redFloat, speed), //red
-
-                CoolUtil.coolLerp(from.greenFloat, to.greenFloat, speed), //green
-
-                CoolUtil.coolLerp(from.blueFloat, to.blueFloat, speed) //blue
-            );
-
-            return result;
-}
-	public static function camLerpShit(a:Float):Float
-        {
-                return FlxG.elapsed / 0.016666666666666666 * a;
-        }
-
-        public static function coolLerp(a:Float, b:Float, c:Float):Float
-        {
-                return a + CoolUtil.camLerpShit(c) * (b - a);
-        }
 
 	public static function numberArray(max:Int, ?min = 0):Array<Int>
 	{
@@ -80,16 +57,44 @@ class CoolUtil
 
 	//uhhhh does this even work at all? i'm starting to doubt
 	public static function precacheSound(sound:String, ?library:String = null):Void {
-		if(!Assets.cache.hasSound(Paths.sound(sound, library))) {
-			FlxG.sound.cache(Paths.sound(sound, library));
-		}
+		precacheSoundFile(Paths.sound(sound, library));
+	}
+
+	public static function precacheMusic(sound:String, ?library:String = null):Void {
+		precacheSoundFile(Paths.music(sound, library));
+	}
+
+	private static function precacheSoundFile(file:Dynamic):Void {
+		if (Assets.exists(file, SOUND) || Assets.exists(file, MUSIC))
+			Assets.getSound(file, true);
 	}
 
 	public static function browserLoad(site:String) {
 		#if linux
-		Sys.command('/usr/bin/xdg-open', [site]);
+		Sys.command('/usr/bin/xdg-open', [site, "&"]);
 		#else
 		FlxG.openURL(site);
 		#end
 	}
+
+	public static function smoothColorChange(from:FlxColor, to:FlxColor, speed:Float = 0.045):FlxColor
+    {
+        var result:FlxColor = FlxColor.fromRGBFloat
+        (
+            CoolUtil.coolLerp(from.redFloat, to.redFloat, speed), //red
+            CoolUtil.coolLerp(from.greenFloat, to.greenFloat, speed), //green
+            CoolUtil.coolLerp(from.blueFloat, to.blueFloat, speed) //blue
+        );
+        return result;
+	}
+
+	public static function camLerpShit(a:Float):Float
+    {
+        return FlxG.elapsed / 0.016666666666666666 * a;
+    }
+
+    public static function coolLerp(a:Float, b:Float, c:Float):Float
+    {
+        return a + CoolUtil.camLerpShit(c) * (b - a);
+    }
 }
