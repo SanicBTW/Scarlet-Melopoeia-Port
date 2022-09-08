@@ -27,12 +27,16 @@ class ClientPrefs {
 	public static var hideTime:Bool = false;
 
 	public static var showMemory:Bool = true;
-	public static var optDisableScoreTween:Bool = false;
+	public static var optScoreZoom:Bool = true;
 	public static var optHideHealthBar:Bool = false;
 	public static var cameraMovOnNoteP:Bool = true;
-	public static var chartScanPriority:String = "normal";
-	public static var iconBoping:Bool = true;
+	public static var iconBoping:Bool = false;
 	public static var pauseMusic:String = "Tea Time";
+	public static var missVolume:Float = 0.2;
+	public static var hitsoundVolume:Float = 0;
+	public static var scoreTextDesign:String = "Engine";
+	public static var comboOffset:Array<Int> = [0, 0, 0, 0];
+	public static var inputType:String = "Kade";
 
 	public static var defaultKeys:Array<FlxKey> = [
 		A, LEFT,			//Note Left
@@ -90,12 +94,16 @@ class ClientPrefs {
 		FlxG.save.data.hideTime = hideTime;
 		
 		FlxG.save.data.showMemory = showMemory;
-		FlxG.save.data.optDisableScoreTween = optDisableScoreTween;
+		FlxG.save.data.optScoreZoom = optScoreZoom;
 		FlxG.save.data.optHideHealthBar = optHideHealthBar;
 		FlxG.save.data.cameraMovOnNoteP = cameraMovOnNoteP;
-		FlxG.save.data.chartScanPriority = chartScanPriority;
 		FlxG.save.data.iconBoping = iconBoping;
 		FlxG.save.data.pauseMusic = pauseMusic;
+		FlxG.save.data.missVolume = missVolume;
+		FlxG.save.data.hitsoundVolume = hitsoundVolume;
+		FlxG.save.data.scoreTextDesign = scoreTextDesign;
+		FlxG.save.data.comboOffset = comboOffset;
+		FlxG.save.data.inputType = inputType;
 
 		FlxG.save.flush();
 
@@ -174,8 +182,8 @@ class ClientPrefs {
 			showMemory = FlxG.save.data.showMemory;
 		}
 
-		if(FlxG.save.data.optDisableScoreTween != null) {
-			optDisableScoreTween = FlxG.save.data.optDisableScoreTween;
+		if(FlxG.save.data.optScoreZoom != null) {
+			optScoreZoom = FlxG.save.data.optScoreZoom;
 		}
 		if(FlxG.save.data.optHideHealthBar != null) {
 			optHideHealthBar = FlxG.save.data.optHideHealthBar;
@@ -183,14 +191,26 @@ class ClientPrefs {
 		if(FlxG.save.data.cameraMovOnNoteP != null) {
 			cameraMovOnNoteP = FlxG.save.data.cameraMovOnNoteP;
 		}
-		if(FlxG.save.data.chartScanPriority != null) {
-			chartScanPriority = FlxG.save.data.chartScanPriority;
-		}
 		if(FlxG.save.data.iconBoping != null) {
 			iconBoping = FlxG.save.data.iconBoping;
 		}
 		if(FlxG.save.data.pauseMusic != null) {
 			pauseMusic = FlxG.save.data.pauseMusic;
+		}
+		if(FlxG.save.data.missVolume != null) {
+			missVolume = FlxG.save.data.missVolume;
+		}
+		if(FlxG.save.data.hitsoundVolume != null) {
+			hitsoundVolume = FlxG.save.data.hitsoundVolume;
+		}
+		if(FlxG.save.data.scoreTextDesign != null) {
+			scoreTextDesign = FlxG.save.data.scoreTextDesign;
+		}
+		if(FlxG.save.data.comboOffset != null) {
+			comboOffset = FlxG.save.data.comboOffset;
+		}
+		if(FlxG.save.data.inputType != null) {
+			inputType = FlxG.save.data.inputType;
 		}
 
 		var save:FlxSave = new FlxSave();

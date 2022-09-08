@@ -36,7 +36,8 @@ class TitleState extends MusicBeatState
 	public static var volumeDownKeys:Array<FlxKey> = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
 	public static var volumeUpKeys:Array<FlxKey> = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
 
-	static var initialized:Bool = false;
+	public static var initialized:Bool = false;
+	public static var closedState:Bool = false;
 
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
@@ -283,7 +284,6 @@ class TitleState extends MusicBeatState
 		}
 	}
 
-	private static var closedState:Bool = false;
 	override function beatHit()
 	{
 		super.beatHit();

@@ -31,7 +31,7 @@ using StringTools;
 // TO DO: Redo the menu creation system for not being as dumb
 class OptionsState extends MusicBeatState
 {
-	var options:Array<String> = ['Notes', #if android 'Mobile Controls' , #end 'Controls', 'Preferences'];
+	var options:Array<String> = ['Notes', 'Adjust Delay and Combo', #if android 'Mobile Controls' , #end 'Controls', 'Preferences'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
@@ -113,8 +113,9 @@ class OptionsState extends MusicBeatState
 
 				case 'Preferences':
 					openSubState(new PreferencesSubstate());
-			
-				
+
+				case 'Adjust Delay and Combo':
+					LoadingState.loadAndSwitchState(new NoteOffsetState());
 			}
 		}
 	}
@@ -694,13 +695,14 @@ class PreferencesSubstate extends MusicBeatSubstate
 		'VISUALS AND UI',
 		'AUDIO',
 		'OPTIMIZATION',
-		'STORAGE ACCESS'
 	];
 	static var noCheckbox:Array<String> = [
 		'Framerate',
-		'Note Delay',
-		'Chart priority',
-		'Pause music'
+		'Pause music',
+		'Miss Volume',
+		'Hitsound Volume',
+		'Score Text design',
+		'Input'
 	];
 
 	static var options:Array<String> = [
@@ -714,8 +716,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 		'Downscroll',
 		'Middlescroll',
 		'Ghost Tapping',
-		'Note Delay',
 		'Camera movement on note press',
+		'Input',
 		'VISUALS AND UI',
 		'FPS Counter',
 		'Memory Counter',
@@ -724,16 +726,16 @@ class PreferencesSubstate extends MusicBeatSubstate
 		'Flashing Lights',
 		'Camera Zooms',
 		'Icon Boping',
+		'Score Text design',
+		'Note Splashes',
 		'AUDIO',
 		'Pause music',
+		'Miss Volume',
+		'Hitsound Volume',
 		'OPTIMIZATION',
 		//add again the only notes option
-		'Disable score tween',
+		'Score Text Zoom on Hit',
 		'Hide Health Bar',
-		#if sys
-		'STORAGE ACCESS',
-		'Chart priority'
-		#end
 	];
 
 	private var grpOptions:FlxTypedGroup<Alphabet>;
@@ -916,8 +918,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 						if(Main.memoryVar != null)
 							Main.memoryVar.visible = ClientPrefs.showMemory;
 
-					case 'Disable score tween':
-						ClientPrefs.optDisableScoreTween = !ClientPrefs.optDisableScoreTween;
+					case 'Score Text Zoom on Hit':
+						ClientPrefs.optScoreZoom = !ClientPrefs.optScoreZoom;
 					case 'Hide Health Bar':
 						ClientPrefs.optHideHealthBar = !ClientPrefs.optHideHealthBar;
 					case 'Camera movement on note press':
@@ -931,6 +933,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 		} else {
 			if(controls.UI_LEFT || controls.UI_RIGHT) {
 				var add:Int = controls.UI_LEFT ? -1 : 1;
+				var floatAdd:Float = controls.UI_LEFT ? -0.1 : 0.1;
+
 				if(holdTime > 0.5 || controls.UI_LEFT_P || controls.UI_RIGHT_P)
 				switch(options[curSelected]) {
 					case 'Framerate':
@@ -945,21 +949,6 @@ class PreferencesSubstate extends MusicBeatSubstate
 							FlxG.drawFramerate = ClientPrefs.framerate;
 							FlxG.updateFramerate = ClientPrefs.framerate;
 						}
-					case 'Note Delay':
-						var mult:Int = 1;
-						if(holdTime > 1.5) { //Double speed after 1.5 seconds holding
-							mult = 2;
-						}
-						ClientPrefs.noteOffset += add * mult;
-						if(ClientPrefs.noteOffset < 0) ClientPrefs.noteOffset = 0;
-						else if(ClientPrefs.noteOffset > 500) ClientPrefs.noteOffset = 500;
-					case 'Chart priority':
-						var options = ['easy', 'normal', 'hard'];
-						if(controls.UI_LEFT_P)
-							changeState(-1, options);
-						else if(controls.UI_RIGHT_P)
-							changeState(1, options);
-						ClientPrefs.chartScanPriority = options[index];
 					case 'Pause music':
 						var options = ['None', 'Breakfast', 'Tea Time'];
 						if(controls.UI_LEFT_P)
@@ -967,6 +956,29 @@ class PreferencesSubstate extends MusicBeatSubstate
 						else if(controls.UI_RIGHT_P)
 							changeState(1, options);
 						ClientPrefs.pauseMusic = options[index];
+					//fix floats
+					case 'Miss Volume':
+						ClientPrefs.missVolume += floatAdd;
+						if(ClientPrefs.missVolume < 0) ClientPrefs.missVolume = 0;
+						else if(ClientPrefs.missVolume > 0.2) ClientPrefs.missVolume = 0.2; //max cap of vol on playstate
+					case 'Hitsound Volume':
+						ClientPrefs.hitsoundVolume += floatAdd;
+						if(ClientPrefs.hitsoundVolume < 0) ClientPrefs.hitsoundVolume = 0;
+						else if(ClientPrefs.hitsoundVolume > 1) ClientPrefs.hitsoundVolume = 1;
+					case 'Score Text design':
+						var options = ['Engine', 'Psych'];
+						if(controls.UI_LEFT_P)
+							changeState(-1, options);
+						else if(controls.UI_RIGHT_P)
+							changeState(1, options);
+						ClientPrefs.scoreTextDesign = options[index];
+					case 'Input':
+						var options = ['Kade', 'Psych'];
+						if(controls.UI_LEFT_P)
+							changeState(-1, options);
+						else if(controls.UI_RIGHT_P)
+							changeState(1, options);
+						ClientPrefs.inputType = options[index];
 				}
 				reloadValues();
 
@@ -1039,18 +1051,24 @@ class PreferencesSubstate extends MusicBeatSubstate
 			case "Memory Counter":
 				daText = "Displays a memory counter";
 			
-			case 'Disable score tween':
-				daText = 'Disables score bop on sick';
+			case 'Score Text Zoom on Hit':
+				daText = "If unchecked, disables the Score text zooming\neverytime you hit a note.";
 			case 'Hide Health Bar':
 				daText = 'Hides health bar and replaces it with a percentage';
 			case 'Camera movement on note press':
 				daText = 'Moves the camera to the note direction';
-			case 'Chart priority':
-				daText = "Change the chart scan priority when\nsearching charts";
 			case 'Icon Boping':
 				daText = "If checked, icons bop";
 			case 'Pause music':
 				daText = "What song do you prefer for the Pause Screen?";
+			case "Miss Volume":
+				daText = "How loud should be the miss sound?";
+			case "Hitsound Volume":
+				daText = "How loud should be the hitsound?";
+			case 'Score Text design':
+				daText = "Type of formatting on score text\nEngine: Sc Mi Acc Ra (FCRa)\nPsych: Sc Mi Ra (Acc) - FCRa";
+			case 'Input':
+				daText = "Type of input for keypresses\nI think that there isnt that much of a difference but here you go";
 		}
 		descText.text = daText;
 
@@ -1124,8 +1142,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 						daValue = ClientPrefs.hideTime;
 					case 'Memory Counter':
 						daValue = ClientPrefs.showMemory;
-					case 'Disable score tween':
-						daValue = ClientPrefs.optDisableScoreTween;
+					case 'Score Text Zoom on Hit':
+						daValue = ClientPrefs.optScoreZoom;
 					case 'Hide Health Bar':
 						daValue = ClientPrefs.optHideHealthBar;
 					case 'Camera movement on note press':
@@ -1143,12 +1161,16 @@ class PreferencesSubstate extends MusicBeatSubstate
 				switch(options[textNumber[i]]) {
 					case 'Framerate':
 						daText = '' + ClientPrefs.framerate;
-					case 'Note Delay':
-						daText = ClientPrefs.noteOffset + 'ms';
-					case 'Chart priority':
-						daText = ClientPrefs.chartScanPriority;
 					case 'Pause music':
 						daText = ClientPrefs.pauseMusic;
+					case "Miss Volume":
+						daText = Math.round(ClientPrefs.missVolume * 100) + '%';
+					case "Hitsound Volume":
+						daText = Math.round(ClientPrefs.hitsoundVolume * 100) + '%';
+					case 'Score Text design':
+						daText = ClientPrefs.scoreTextDesign;
+					case 'Input':
+						daText = ClientPrefs.inputType;
 				}
 				var lastTracker:FlxSprite = text.sprTracker;
 				text.sprTracker = null;

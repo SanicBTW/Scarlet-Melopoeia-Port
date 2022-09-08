@@ -17,9 +17,7 @@ import lime.utils.Assets;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
 import WeekData;
-#if sys
 import openfl.system.System;
-#end
 
 using StringTools;
 
@@ -29,7 +27,7 @@ class FreeplayState extends MusicBeatState
 
 	var selector:FlxText;
 	private static var curSelected:Int = 0;
-	var curDifficulty:Int = 1;
+	var curDifficulty:Int = 2;
 
 	var scoreBG:FlxSprite;
 	var scoreText:FlxText;
@@ -59,9 +57,7 @@ class FreeplayState extends MusicBeatState
 		PlayState.voices = null;
 		PlayState.SONG = null;
 
-		#if sys
 		System.gc();
-		#end
 
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
@@ -70,7 +66,6 @@ class FreeplayState extends MusicBeatState
 		WeekData.reloadWeekFiles(false);
 
 		#if windows
-		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 
@@ -149,26 +144,9 @@ class FreeplayState extends MusicBeatState
 		intendedColor = bg.color;
 
 		changeSelection();
-		changeDiff();
-
-		var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, 0xFF000000);
-		textBG.alpha = 0.6;
-		add(textBG);
-
-		#if PRELOAD_ALL
-		var leText:String = "Press SPACE to listen to the Song / Press RESET to Reset your Score and Accuracy.";
-		var size:Int = 16;
-		#else
-		var leText:String = "Press RESET to Reset your Score and Accuracy.";
-		var size:Int = 18;
-		#end
-		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, leText, size);
-		text.setFormat(Paths.font("vcr.ttf"), size, FlxColor.WHITE, RIGHT);
-		text.scrollFactor.set();
-		add(text);
 
 		#if android
-		addVirtualPad(LEFT_FULL, A_B);
+		addVirtualPad(UP_DOWN, A_B);
 		#end
 
 		super.create();
@@ -243,12 +221,6 @@ class FreeplayState extends MusicBeatState
 			}
 		}
 
-		if (controls.UI_LEFT_P)
-			changeDiff(-1);
-		else if (controls.UI_RIGHT_P)
-			changeDiff(1);
-		else if (upP || downP) changeDiff();
-
 		if (controls.BACK)
 		{
 			if(colorTween != null) {
@@ -258,35 +230,9 @@ class FreeplayState extends MusicBeatState
 			MusicBeatState.switchState(new MainMenuState());
 		}
 
-		if(space)
-		{
-			if(instPlaying != curSelected)
-			{
-				#if PRELOAD_ALL
-				destroyFreeplayVocals();
-				FlxG.sound.music.volume = 0;
-				var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
-				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
-				if (PlayState.SONG.needsVoices)
-					vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
-				else
-					vocals = new FlxSound();
-
-				FlxG.sound.list.add(vocals);
-				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.7);
-				vocals.play();
-				vocals.persist = true;
-				vocals.looped = true;
-				vocals.volume = 0.7;
-				instPlaying = curSelected;
-				#end
-			}
-		}
-
-		else if (accepted)
+		if (accepted)
 		{
 			persistentUpdate = false;
-			
 			var songLowercase:String = songs[curSelected].songName.toLowerCase().replace(' ', '-');
 			var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
 			trace(poop);
@@ -314,14 +260,7 @@ class FreeplayState extends MusicBeatState
 
 			destroyFreeplayVocals();
 
-			#if sys
 			System.gc();
-			#end
-		}
-		else if(controls.RESET)
-		{
-			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
-			FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
 
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
@@ -330,31 +269,13 @@ class FreeplayState extends MusicBeatState
 		super.update(elapsed);
 	}
 
-	public static function destroyFreeplayVocals() {
+	public static function destroyFreeplayVocals() 
+	{
 		if(vocals != null) {
 			vocals.stop();
 			vocals.destroy();
 		}
 		vocals = null;
-	}
-
-	function changeDiff(change:Int = 0)
-	{
-		curDifficulty += change;
-
-		if (curDifficulty < 0)
-			curDifficulty = CoolUtil.difficultyStuff.length-1;
-		if (curDifficulty >= CoolUtil.difficultyStuff.length)
-			curDifficulty = 0;
-
-		#if !switch
-		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
-		intendedRating = Highscore.getRating(songs[curSelected].songName, curDifficulty);
-		#end
-
-		PlayState.storyDifficulty = curDifficulty;
-		diffText.text = '< ' + CoolUtil.difficultyString() + ' >';
-		positionHighscore();
 	}
 
 	function changeSelection(change:Int = 0, playSound:Bool = true)
