@@ -75,16 +75,10 @@ class Note extends FlxSprite
 					texture = "specialNotes/RUMIAdodge_wave1";
 				case "RUMIA-Bullet Note":
 					texture = "specialNotes/RUMIAbullet_NOTE";
-					colorSwap.hue = 0;
-					colorSwap.saturation = -20;
-					colorSwap.brightness = 1;
 				case "Projectile Note":
 					texture = "specialNotes/PROJECTILENOTE_assets";
 				case "REIMU-Bullet Note":
 					texture = "specialNotes/REIMUbullet_NOTE";
-					colorSwap.hue = 0;
-					colorSwap.saturation = -20;
-					colorSwap.brightness = 1;
 				case 'No Animation':
 					noAnimation = true;
 				case 'GF Sing':
