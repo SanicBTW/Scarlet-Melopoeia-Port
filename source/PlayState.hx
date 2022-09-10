@@ -257,6 +257,7 @@ class PlayState extends MusicBeatState
 			case "lowest-vibes":
 				curStage = "subway";
 
+				mult = 0;
 				STRUM_X = STRUM_X_MIDDLESCROLL;
 
 				defaultCamZoom = 1;
@@ -278,9 +279,11 @@ class PlayState extends MusicBeatState
 				tunnelLight.frames = Paths.getSparrowAtlas('prologue/tunnelLight');
 				tunnelLight.animation.addByPrefix("movement", "tunnel", 24, true);
 				tunnelLight.scrollFactor.set(1,1);
+				tunnelLight.antialiasing = ClientPrefs.globalAntialiasing;
 
 				subway = new FlxSprite(-1250, -750).loadGraphic(Paths.image('prologue/prologue_subway'));
 				subway.scrollFactor.set(1,1);
+				subway.antialiasing = ClientPrefs.globalAntialiasing;
 
 				add(tunnelLight);
 				add(subway);
@@ -303,18 +306,25 @@ class PlayState extends MusicBeatState
 
 				var shrine_sky = new FlxSprite(-600, -250).loadGraphic(Paths.image("shrine/shrine_sky"));
 				shrine_sky.scrollFactor.set(0.1, 0.1);
+				shrine_sky.antialiasing = ClientPrefs.globalAntialiasing;
 				var shrine_forest = new FlxSprite(-600, -350).loadGraphic(Paths.image("shrine/shrine_forest"));
 				shrine_forest.scrollFactor.set(0.3, 0.3);
+				shrine_forest.antialiasing = ClientPrefs.globalAntialiasing;
 				var shrine_warehouse = new FlxSprite(-600, -250).loadGraphic(Paths.image("shrine/shrine_warehouse"));
 				shrine_warehouse.scrollFactor.set(0.8, 0.8);
+				shrine_warehouse.antialiasing = ClientPrefs.globalAntialiasing;
 				var shrine_ground = new FlxSprite(-600, -250).loadGraphic(Paths.image("shrine/shrine_ground"));
 				shrine_ground.scrollFactor.set(0.95, 0.95);
+				shrine_ground.antialiasing = ClientPrefs.globalAntialiasing;
 				var shrine_treesback = new FlxSprite(-600, -250).loadGraphic(Paths.image("shrine/shrine_treesback"));
 				shrine_treesback.scrollFactor.set(0.9, 0.9);
+				shrine_treesback.antialiasing = ClientPrefs.globalAntialiasing;
 				var shrine_treesbody = new FlxSprite(-600, -250).loadGraphic(Paths.image("shrine/shrine_treesbody"));
 				shrine_treesbody.scrollFactor.set(0.95, 0.95);
+				shrine_treesbody.antialiasing = ClientPrefs.globalAntialiasing;
 				var shrine_treesfront = new FlxSprite(-600, -250).loadGraphic(Paths.image("shrine/shrine_treesfront"));
 				shrine_treesfront.scrollFactor.set(0.97, 0.97);
+				shrine_treesfront.antialiasing = ClientPrefs.globalAntialiasing;
 				add(shrine_sky);
 				add(shrine_forest);
 				add(shrine_warehouse);
@@ -333,6 +343,7 @@ class PlayState extends MusicBeatState
 					REIMUorb.animation.addByPrefix("2", 'GREEN_REIMUorb', 24, false);
 					REIMUorb.animation.addByPrefix("3", 'RED_REIMUorb', 24, false);
 					REIMUorb.animation.play("idle");
+					REIMUorb.antialiasing = ClientPrefs.globalAntialiasing;
 					add(REIMUorb);
 				}
 
@@ -354,30 +365,37 @@ class PlayState extends MusicBeatState
 
 				var entrance_nightsky = new FlxSprite(-600, -550).loadGraphic(Paths.image('entrance/entrance_nightsky'));
 				entrance_nightsky.scrollFactor.set(0.05, 0.05);
+				entrance_nightsky.antialiasing = ClientPrefs.globalAntialiasing;
 				var entrance_mountains = new FlxSprite(-600, -350).loadGraphic(Paths.image('entrance/entrance_mountains'));
 				entrance_mountains.scrollFactor.set(0.1, 0.1);
+				entrance_mountains.antialiasing = ClientPrefs.globalAntialiasing;
 				var entrance_trees = new FlxSprite(-600, -450).loadGraphic(Paths.image('entrance/entrance_trees'));
 				entrance_trees.scrollFactor.set(0.3, 0.3);
+				entrance_trees.antialiasing = ClientPrefs.globalAntialiasing;
 				var entrance_ground = new FlxSprite(-600, -250).loadGraphic(Paths.image('entrance/entrance_ground'));
 				entrance_ground.scrollFactor.set(0.95, 0.95);
+				entrance_ground.antialiasing = ClientPrefs.globalAntialiasing;
 
 				rumia_fog = new FlxSprite(-500, -1500);
 				rumia_fog.frames = Paths.getSparrowAtlas('entrance/rumia_fog');
 				rumia_fog.animation.addByPrefix("fog", "rumia_fog", 24, true);
 				rumia_fog.scrollFactor.set(0.05, 0);
 				rumia_fog.scale.set(1.5, 1.5);
+				rumia_fog.antialiasing = ClientPrefs.globalAntialiasing;
 
 				sign = new FlxSprite(420, 100);
 				sign.frames = Paths.getSparrowAtlas("entrance/spell-cards-rumia");
 				sign.animation.addByPrefix("demarcation", "spell", 24, false);
 				sign.alpha = 0;
 				sign.scrollFactor.set(0, 0);
+				sign.antialiasing = ClientPrefs.globalAntialiasing;
 
 				laser = new FlxSprite(700, 700);
 				laser.frames = Paths.getSparrowAtlas("entrance/RUMIA-laser");
 				laser.animation.addByPrefix("idle", "RUMIA-laserIdle", 24, false);
 				laser.animation.addByPrefix("fire", "RUMIA-laserFire", 24, false);
 				laser.alpha = 0;
+				laser.antialiasing = ClientPrefs.globalAntialiasing;
 
 				add(entrance_nightsky);
 				add(entrance_mountains);
@@ -408,24 +426,28 @@ class PlayState extends MusicBeatState
 
 				var funky_bg = new FlxSprite(-400, -250).loadGraphic(Paths.image('funky-bg'));
 				funky_bg.scrollFactor.set(1,1);
+				funky_bg.antialiasing = ClientPrefs.globalAntialiasing;
 
 				daiyousei = new FlxSprite(950, 350);
 				daiyousei.frames = Paths.getSparrowAtlas("patrol/PatrolDAI");
 				daiyousei.animation.addByIndices('dance0', 'DAIYOUSEI_idle', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14], "", 24);
 				daiyousei.animation.addByIndices('dance1', 'DAIYOUSEI_idle', [15,16,17,18,19,20,21,22,23,24,25,26,27,28,29], "", 24);
 				daiyousei.scrollFactor.set(1,1);
+				daiyousei.antialiasing = ClientPrefs.globalAntialiasing;
 				rumia = new FlxSprite(850, 480);
 				rumia.frames = Paths.getSparrowAtlas("patrol/PatrolRUMIA");
 				rumia.animation.addByPrefix("idle1", 'PatrolRUMIA', 24, false);
 				rumia.animation.addByPrefix("idle2", "PatrolRUMIA", 24, false);
 				rumia.scrollFactor.set(0.7, 0.2);
 				rumia.scale.set(1.2, 1.2);
+				rumia.antialiasing = ClientPrefs.globalAntialiasing;
 				sakuya = new FlxSprite(-350, 420);
 				sakuya.frames = Paths.getSparrowAtlas("patrol/PatrolSAKUYA");
 				sakuya.animation.addByPrefix("idle1", "PatrolSAKUYA", 24, false);
 				sakuya.animation.addByPrefix("idle2", "PatrolSAKUYA", 24, false);
 				sakuya.scrollFactor.set(0.7, 0.2);
 				sakuya.scale.set(1.2, 1.2);
+				sakuya.antialiasing = ClientPrefs.globalAntialiasing;
 
 				add(funky_bg);
 		}
@@ -1747,6 +1769,9 @@ class PlayState extends MusicBeatState
 
 		deathCounter = 0;
 		seenCutscene = false;
+		//fix for the dumb way of forcing middlescroll on subway :skull:
+		STRUM_X = 42;
+		STRUM_X_MIDDLESCROLL = -278;
 		KillNotes();
 
 		if (SONG.validScore && !cpuControlled)
@@ -2745,6 +2770,13 @@ class PlayState extends MusicBeatState
 		switch(curStage)
 		{
 			case "subway":
+				for(i in 0...opponentStrums.length)
+				{
+					opponentStrums.members[i].visible = false;
+				}
+				timeBar.visible = false;
+				timeBarBG.visible = false;
+				timeTxt.visible = false;
 				camHUD.alpha = 0;
 				iconP1.alpha = 0;
 				iconP2.alpha = 0;
