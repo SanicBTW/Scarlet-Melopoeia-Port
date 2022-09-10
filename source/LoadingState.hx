@@ -8,13 +8,13 @@ import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.util.FlxTimer;
 import flixel.math.FlxMath;
-
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 import lime.utils.AssetLibrary;
 import lime.utils.AssetManifest;
-
 import haxe.io.Path;
+import flixel.util.FlxColor;
+import flixel.ui.FlxBar;
 
 class LoadingState extends MusicBeatState
 {
@@ -40,7 +40,7 @@ class LoadingState extends MusicBeatState
 		this.directory = directory;
 	}
 
-	var loadBar:FlxSprite;
+	var loadBar:FlxBar;
 	var gfDance:FlxSprite;
 	var danceLeft:Bool = false;
 
@@ -58,8 +58,11 @@ class LoadingState extends MusicBeatState
 		gfDance.antialiasing = ClientPrefs.globalAntialiasing;
 		add(gfDance);
 
-		loadBar = new FlxSprite(0, FlxG.height - 20).makeGraphic(FlxG.width, 10, 0xffff16d2);
+		loadBar = new FlxBar();
+		loadBar.screenCenter();
+		loadBar.y = FlxG.height * 0.97;
 		loadBar.screenCenter(X);
+		loadBar.scale.set(14, 1);
 		loadBar.antialiasing = ClientPrefs.globalAntialiasing;
 		add(loadBar);
 		
@@ -124,7 +127,7 @@ class LoadingState extends MusicBeatState
 
 		if(callbacks != null) {
 			targetShit = FlxMath.remapToRange(callbacks.numRemaining / callbacks.length, 1, 0, 0, 1);
-			loadBar.scale.x += 0.5 * (targetShit - loadBar.scale.x);
+			loadBar.percent = 100 * targetShit;
 		}
 	}
 	
