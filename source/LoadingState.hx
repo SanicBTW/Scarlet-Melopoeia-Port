@@ -62,7 +62,7 @@ class LoadingState extends MusicBeatState
 		loadBar.screenCenter();
 		loadBar.y = FlxG.height * 0.97;
 		loadBar.screenCenter(X);
-		loadBar.scale.set(14, 1);
+		loadBar.scale.set(10, 1);
 		loadBar.antialiasing = ClientPrefs.globalAntialiasing;
 		add(loadBar);
 		
@@ -125,6 +125,19 @@ class LoadingState extends MusicBeatState
 
 		Conductor.songPosition = FlxG.sound.music.time;
 
+		if(controls.ACCEPT)
+		{
+			if(gfDance != null) 
+			{
+				danceLeft = !danceLeft;
+			
+				if (danceLeft)
+					gfDance.animation.play('danceRight');
+				else
+					gfDance.animation.play('danceLeft');
+			}
+		}
+
 		if(callbacks != null) {
 			targetShit = FlxMath.remapToRange(callbacks.numRemaining / callbacks.length, 1, 0, 0, 1);
 			loadBar.percent = 100 * targetShit;
@@ -135,7 +148,8 @@ class LoadingState extends MusicBeatState
 	{
 		super.beatHit();
 
-		if(gfDance != null) {
+		if(gfDance != null) 
+		{
 			danceLeft = !danceLeft;
 
 			if (danceLeft)
