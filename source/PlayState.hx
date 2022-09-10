@@ -2281,22 +2281,6 @@ class PlayState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('hitsound'), ClientPrefs.hitsoundVolume);
 			}
 
-			switch(note.noteType) {
-				case 'RUMIA-Hurt 1' | 'RUMIA-Hurt 2-GREEN' | 'RUMIA-Hurt 2-BLUE' | 'RUMIA-Hurt 2-RED':
-					if(cpuControlled) return;
-					health -= 0.23;
-					return;
-				case "RUMIA-Bullet Note":
-					boyfriend.playAnim(grazeAnims[Std.int(Math.abs(note.noteData)) % 4], true);
-					boyfriend.specialAnim = true;
-					FlxG.sound.play(Paths.sound("graze"), 0.1);
-				case "REIMU-Bullet Note":
-					boyfriend.playAnim("dodge", true);
-					boyfriend.specialAnim = true;
-					camGame.shake(0.01, 0.2);
-					REIMUorb.animation.play(Std.string(Std.int(Math.abs(note.noteData)) % 4));
-			}
-
 			if (!note.isSustainNote)
 			{
 				combo += 1;
@@ -2316,9 +2300,27 @@ class PlayState extends MusicBeatState
 
 				if(char != null)
 				{
-					cameraShit(singAnims[Std.int(Math.abs(note.noteData)) % 4], false);
-					char.playAnim(singAnims[Std.int(Math.abs(note.noteData)) % 4] + daAlt, true);
-					char.holdTimer = 0;
+					//what if
+					switch(note.noteType) 
+					{
+						case 'RUMIA-Hurt 1' | 'RUMIA-Hurt 2-GREEN' | 'RUMIA-Hurt 2-BLUE' | 'RUMIA-Hurt 2-RED':
+							if(cpuControlled) return;
+							health -= 0.23;
+							return;
+						case "RUMIA-Bullet Note":
+							char.playAnim(grazeAnims[Std.int(Math.abs(note.noteData)) % 4], true);
+							char.specialAnim = true;
+							FlxG.sound.play(Paths.sound("graze"), 0.1);
+						case "REIMU-Bullet Note":
+							char.playAnim("dodge", true);
+							char.specialAnim = true;
+							camGame.shake(0.01, 0.2);
+							REIMUorb.animation.play(Std.string(Std.int(Math.abs(note.noteData)) % 4));
+						default:
+							cameraShit(singAnims[Std.int(Math.abs(note.noteData)) % 4], false);
+							char.playAnim(singAnims[Std.int(Math.abs(note.noteData)) % 4] + daAlt, true);
+							char.holdTimer = 0;
+					}
 				}
 
 				if(note.noteType == "Hey!") 
